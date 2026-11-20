@@ -1,0 +1,8 @@
+{
+  "name": "Remix BiSpec Pairwise AI (BSPAI)",
+  "description": "Bispecific antibody target combination discovery workbench powered by single-cell features, pairwise ranking, and grounded RAG reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

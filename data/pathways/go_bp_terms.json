@@ -1,0 +1,57 @@
+{
+  "GO:0002250_adaptive_immune_response": [
+    "CD274", "PDCD1", "CTLA4", "LAG3", "TIGIT", "HAVCR2", "VSIR", "BTLA", "VTCN1",
+    "CD276", "CD27", "CD28", "ICOS", "TNFRSF9", "TNFRSF4", "TNFRSF18", "CD40",
+    "CD40LG", "CD80", "CD86", "CD3E", "CD3D", "CD3G", "CD247", "CD8A", "CD8B",
+    "CD4", "TRAC", "TRBC1", "HLA-A", "B2M", "CD19", "MS4A1", "CD22", "CD79B",
+    "TNFRSF17", "GPRC5D", "CD38"
+  ],
+  "GO:0050776_regulation_of_immune_response": [
+    "CD274", "PDCD1", "CTLA4", "LAG3", "TIGIT", "HAVCR2", "VSIR", "BTLA", "PVR",
+    "NECTIN2", "CD226", "CD96", "CD160", "CD244", "ENTPD1", "NT5E", "ADORA2A",
+    "TNFRSF14", "CD47", "SIRPA", "LILRB1", "LILRB2", "LILRB4", "SIGLEC15",
+    "KLRC1", "KLRD1", "KLRK1", "NCR1", "NCR3", "CD24", "CD200"
+  ],
+  "GO:0007169_transmembrane_RTK_signaling": [
+    "EGFR", "MET", "ERBB2", "ERBB3", "ERBB4", "KDR", "FLT1", "FLT4", "FGFR1",
+    "FGFR2", "FGFR3", "FGFR4", "IGF1R", "INSR", "PDGFRA", "PDGFRB", "KIT",
+    "FLT3", "CSF1R", "AXL", "TYRO3", "MERTK", "ALK", "RET", "NTRK1", "NTRK2",
+    "NTRK3", "ROS1", "DDR1", "DDR2", "EPHA2", "EPHA3", "EPHB2", "EPHB4", "ROR1",
+    "ROR2", "PTK7", "TEK"
+  ],
+  "GO:0001525_angiogenesis": [
+    "VEGFA", "VEGFB", "VEGFC", "KDR", "FLT1", "FLT4", "ANGPT1", "ANGPT2", "TEK",
+    "DLL4", "NOTCH1", "NRP1", "NRP2", "PECAM1", "CDH5", "ENG", "ACVRL1",
+    "ITGAV", "ITGB3", "EPHB4", "EFNB2", "ROBO1", "MMP14", "CA9"
+  ],
+  "GO:0007155_cell_adhesion": [
+    "EPCAM", "CEACAM5", "CEACAM1", "CEACAM6", "MUC1", "MUC16", "MSLN", "CLDN18",
+    "CLDN6", "CLDN4", "CLDN3", "NECTIN4", "CDH1", "CDH2", "CDH3", "CDH6",
+    "CDH17", "CD44", "BSG", "ALCAM", "MCAM", "NCAM1", "L1CAM", "ITGAV",
+    "ITGB1", "ITGB3", "ITGB6", "ITGA4", "ITGA5", "ITGA6", "ITGAL", "ITGB2",
+    "ICAM1", "VCAM1", "SELE", "SELP", "SDC1", "FN1", "POSTN"
+  ],
+  "GO:0006909_phagocytosis_and_myeloid_activation": [
+    "CD47", "SIRPA", "CD24", "SIGLEC7", "SIGLEC9", "SIGLEC15", "SIGLEC1",
+    "LILRB1", "LILRB2", "LILRB4", "MERTK", "TYROBP", "TREM1", "TREM2",
+    "CLEC12A", "CLEC7A", "MARCO", "MSR1", "CD163", "MRC1", "CD68", "ITGAM",
+    "ITGAX", "CD14", "FCGR1A", "FCGR2A", "FCGR2B", "FCGR3A", "CSF1R"
+  ],
+  "GO:0042110_T_cell_activation_and_trafficking": [
+    "CD3E", "CD3D", "CD3G", "CD247", "CD28", "CTLA4", "PDCD1", "ICOS", "TNFRSF9",
+    "TNFRSF4", "TNFRSF18", "CD27", "CD40LG", "CD2", "CD5", "CD6", "CD7",
+    "IL2RA", "IL2RB", "IL2RG", "IL7R", "CCR4", "CCR5", "CCR7", "CCR8", "CXCR3",
+    "CXCR5", "CXCR6", "CX3CR1", "CXCL9", "CXCL10", "CXCL13", "CCL5", "S1PR1"
+  ],
+  "GO:0001817_cytokine_and_TGFb_TME_regulation": [
+    "TGFB1", "TGFBR1", "TGFBR2", "IL6R", "IL6ST", "IL10RA", "IL13RA2", "IL15RA",
+    "IL1R1", "IL1RAP", "IFNAR1", "IFNGR1", "TNFRSF1A", "TNFRSF1B", "ENTPD1",
+    "NT5E", "ADORA2A", "FAP", "LRRC15", "SPP1", "PLAUR", "CCR2", "CCL2"
+  ],
+  "GO:0016020_tumor_associated_membrane_markers": [
+    "FOLH1", "FOLR1", "TACSTD2", "DLL3", "GPC3", "GPC1", "TPBG", "LY6E",
+    "LY6G6D", "SSTR2", "CA9", "CA12", "PSCA", "STEAP1", "STEAP2", "TMPRSS2",
+    "SLC34A2", "SLC7A5", "SLC3A2", "TFRC", "SLC1A5", "SLC2A1", "PROM1",
+    "LGR5", "TSPAN8", "PMEL", "TYRP1", "GPNMB", "MUC4", "MUC5AC", "FAP", "LRRC15"
+  ]
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+*.h5ad
+*.tar
+*.gz
+*.rds
+*.joblib
+*.h5ad

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7a98f" />
+  <title>BiSpec Pairwise AI | Smarter Target Pair Discovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="announcement"><span class="pulse"></span> AI-assisted research concept <span class="announcement-sep">•</span> Frontend demo — no live clinical predictions</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="BiSpec Pairwise AI home">
+      <span class="brand-mark"><span></span><span></span></span>
+      <span>BiSpec<span class="brand-light">Pairwise</span><small>AI RESEARCH STUDIO</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav">
+      <a class="nav-link active" href="#home">Home</a>
+      <a class="nav-link" href="#predict">Predict pairs</a>
+      <a class="nav-link" href="#leaderboard">Leaderboard</a>
+      <a class="nav-link" href="#glossary">Glossary</a>
+      <a class="nav-cta" href="#predict">Explore predictions <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-icon">✦</span> DISCOVER THE POWER OF TWO</div>
+        <h1>Two targets.<br><span class="gradient-text">One smarter</span><br>therapeutic idea.</h1>
+        <p class="hero-description">Explore how artificial intelligence can help researchers investigate promising target combinations for bispecific antibodies — bringing biological insight and pairwise learning into one place.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#predict">Try the pair explorer <span>→</span></a>
+          <a class="button button-ghost" href="#about"><span class="play-icon">▶</span> How it works</a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatar-stack"><i>🧬</i><i>🔬</i><i>🧫</i></div>
+          <div><strong>Biology meets machine learning</strong><small>Designed for discovery, learning & exploration</small></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="molecule molecule-a"><span>CD3</span></div>
+        <div class="molecule molecule-b"><span>EGFR</span></div>
+        <div class="antibody">
+          <div class="arm arm-left"></div><div class="arm arm-right"></div><div class="stem"></div>
+          <div class="junction"></div>
+          <span class="arm-label label-left">Target A</span><span class="arm-label label-right">Target B</span>
+        </div>
+        <div class="art-caption"><span class="caption-dot"></span> A bispecific antibody concept</div>
+        <div class="floating-card card-top"><span class="mini-icon peach">✦</span><div><small>DUAL SPECIFICITY</small><strong>Two distinct targets</strong></div></div>
+        <div class="floating-card card-bottom"><span class="mini-icon blue">⌁</span><div><small>PAIRWISE LEARNING</small><strong>Compare candidate pairs</strong></div></div>
+      </div>
+      <div class="hero-bottom-note">BIOLOGY-INSPIRED <span>✳</span> DATA-DRIVEN <span>✳</span> RESEARCH-FOCUSED</div>
+    </section>
+
+    <section class="stats-strip">
+      <div><strong>2</strong><span>target proteins<br>in one antibody</span></div>
+      <div><strong>5+</strong><span>biological feature<br>perspectives</span></div>
+      <div><strong>AI</strong><span>pairwise learning<br>approach</span></div>
+      <div><strong>1</strong><span>goal: informed<br>early discovery</span></div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="section-heading">
+        <div class="eyebrow">THE SCIENCE, SIMPLIFIED</div>
+        <h2>What are <span class="gradient-text">bispecific antibodies?</span></h2>
+        <p>Think of them as molecular connectors designed to recognize two different targets instead of just one.</p>
+      </div>
+      <div class="science-grid">
+        <article class="science-card science-main">
+          <div class="card-icon peach-icon">✧</div>
+          <h3>One antibody, two targets</h3>
+          <p>A bispecific antibody (BsAb) is engineered to bind two different antigens. Depending on the design, it may bring two cells close together or block two biological signals.</p>
+          <div class="target-chips"><span>Target A</span><b>＋</b><span>Target B</span><b>→</b><span class="chip-result">BsAb</span></div>
+        </article>
+        <article class="science-card">
+          <div class="card-icon blue-icon">⌘</div>
+          <h3>Why pair targets?</h3>
+          <p>Combining targets may create complementary or synergistic effects. Researchers also need to consider where targets are expressed and possible safety concerns.</p>
+        </article>
+        <article class="science-card">
+          <div class="card-icon lavender-icon">⌁</div>
+          <h3>Where AI can help</h3>
+          <p>Machine learning can compare candidate pairs using biological features, rank possibilities and highlight factors that may influence a prediction.</p>
+        </article>
+      </div>
+      <div class="insight-banner"><div class="insight-symbol">i</div><p><strong>Important:</strong> A promising computational score is a research clue, not proof that a drug will be safe or effective. Laboratory and clinical validation are essential.</p></div>
+    </section>
+
+    <section class="workflow-section section">
+      <div class="section-heading centered">
+        <div class="eyebrow">FROM BIOLOGY TO INSIGHT</div>
+        <h2>How the <span class="gradient-text">BSPAI approach</span> works</h2>
+        <p>A simplified view of the workflow described in the research paper.</p>
+      </div>
+      <div class="workflow">
+        <article class="workflow-step"><div class="step-number">01</div><div class="step-icon">🧬</div><h3>Biological data</h3><p>Single-cell gene expression and known bispecific drug development data.</p></article>
+        <div class="workflow-arrow">→</div>
+        <article class="workflow-step"><div class="step-number">02</div><div class="step-icon">⚙️</div><h3>Feature engineering</h3><p>Expression, safety, pathway, correlation and gene-embedding features.</p></article>
+        <div class="workflow-arrow">→</div>
+        <article class="workflow-step"><div class="step-number">03</div><div class="step-icon">📊</div><h3>Pairwise learning</h3><p>XGBoost compares candidate pairs and estimates their relative potential.</p></article>
+        <div class="workflow-arrow">→</div>
+        <article class="workflow-step"><div class="step-number">04</div><div class="step-icon">✧</div><h3>Interpretation</h3><p>Important features and supporting context help explain the model output.</p></article>
+      </div>
+      <p class="workflow-footnote">Based on Zhang et al., <em>BiSpec Pairwise AI</em> (2024), which describes a two-phase framework for prediction and interpretation.</p>
+    </section>
+
+    <section class="section predictor-section" id="predict">
+      <div class="predictor-panel">
+        <div class="predictor-copy">
+          <div class="eyebrow">PAIR EXPLORER <span class="live-pill">INTERACTIVE DEMO</span></div>
+          <h2>What could your<br><span class="gradient-text">target pair</span> reveal?</h2>
+          <p>Select two targets to explore a sample result card. This is a frontend-only demonstration using illustrative values — it is not connected to an ML model or medical database.</p>
+          <div class="feature-list"><span>✓ Choose two target names</span><span>✓ View a sample pair summary</span><span>✓ Learn what to investigate next</span></div>
+        </div>
+        <div class="predictor-form-card">
+          <div class="form-card-top"><span class="form-spark">✦</span><div><strong>Build a target pair</strong><small>Choose two distinct targets</small></div><span class="demo-tag">DEMO</span></div>
+          <label for="targetA">FIRST TARGET</label>
+          <div class="select-wrap"><select id="targetA"><option value="CD3">CD3</option><option value="CD274">CD274 (PD-L1)</option><option value="EGFR">EGFR</option><option value="CTLA4">CTLA4</option><option value="ERBB2">ERBB2</option><option value="CD40">CD40</option><option value="CD19">CD19</option><option value="MUC1">MUC1</option><option value="PDCD1">PDCD1 (PD-1)</option></select><span>⌄</span></div>
+          <div class="pair-connector"><span></span><b>＋</b><span></span></div>
+          <label for="targetB">SECOND TARGET</label>
+          <div class="select-wrap"><select id="targetB"><option value="EGFR">EGFR</option><option value="CD3">CD3</option><option value="CTLA4">CTLA4</option><option value="CD274">CD274 (PD-L1)</option><option value="ERBB2">ERBB2</option><option value="CD40">CD40</option><option value="CD19">CD19</option><option value="MUC1">MUC1</option><option value="PDCD1">PDCD1 (PD-1)</option></select><span>⌄</span></div>
+          <button class="button button-primary predict-button" id="exploreButton">Explore sample pair <span>→</span></button>
+          <p class="form-disclaimer">Illustrative educational demo · Not for clinical decisions</p>
+          <div class="result-box" id="resultBox" aria-live="polite">
+            <div class="result-heading"><span class="result-check">✦</span><div><small>SAMPLE PAIR CARD</small><strong id="resultPair">CD3 + EGFR</strong></div><span class="sample-label">ILLUSTRATIVE</span></div>
+            <p id="resultDescription">This is a sample result area. Choose targets and explore the educational summary.</p>
+            <div class="result-metrics"><div><small>Pair category</small><strong id="resultCategory">Immune + tumour</strong></div><div><small>Research focus</small><strong id="resultFocus">Cell bridging</strong></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section leaderboard-section" id="leaderboard">
+      <div class="section-heading">
+        <div class="eyebrow">CANDIDATE PAIR BOARD</div>
+        <h2>Explore the <span class="gradient-text">leaderboard</span></h2>
+        <p>A sample interface showing how ranked candidate pairs could be displayed in a future model-connected version.</p>
+      </div>
+      <div class="leaderboard-card">
+        <div class="table-toolbar"><div><span class="table-dot"></span><strong>Candidate pair rankings</strong><small>Illustrative sample data</small></div><div class="table-search"><span>⌕</span><input id="leaderSearch" type="search" placeholder="Search target pair..." aria-label="Search leaderboard"></div></div>
+        <div class="table-scroll"><table><thead><tr><th>RANK</th><th>TARGET PAIR</th><th>PAIR TYPE</th><th>RESEARCH NOTE</th><th>STATUS</th></tr></thead><tbody id="leaderRows">
+          <tr><td><span class="rank rank-gold">01</span></td><td class="pair-name">CD274 <i>+</i> CTLA4</td><td>Immune checkpoint</td><td>Dual immune checkpoint strategy</td><td><span class="status status-clinical">Clinical example</span></td></tr>
+          <tr><td><span class="rank rank-silver">02</span></td><td class="pair-name">EGFR <i>+</i> ERBB2</td><td>TAA + TAA</td><td>Two tumour-associated targets</td><td><span class="status status-research">Research concept</span></td></tr>
+          <tr><td><span class="rank rank-bronze">03</span></td><td class="pair-name">CD3 <i>+</i> ERBB3</td><td>Immune + tumour</td><td>Potential cell-bridging approach</td><td><span class="status status-research">Research concept</span></td></tr>
+          <tr><td><span class="rank">04</span></td><td class="pair-name">CD40 <i>+</i> EGFR</td><td>Immune + tumour</td><td>Potential immune-cell engagement</td><td><span class="status status-research">Research concept</span></td></tr>
+          <tr><td><span class="rank">05</span></td><td class="pair-name">EGFR <i>+</i> MUC1</td><td>TAA + TAA</td><td>Dual tumour-associated targets</td><td><span class="status status-research">Research concept</span></td></tr>
+        </tbody></table></div>
+        <div class="table-footer"><span>Showing illustrative examples only</span><span>Rankings are not live model predictions <b>↗</b></span></div>
+      </div>
+      <p class="source-note">Pair examples and categories are informed by the target-pair discussion and Table 6 of the 2024 BSPAI paper; this page does not reproduce its complete ranked output.</p>
+    </section>
+
+    <section class="section glossary-section" id="glossary">
+      <div class="glossary-intro">
+        <div class="eyebrow">YOUR MINI BIOLOGY COMPANION</div>
+        <h2>Research terms,<br><span class="gradient-text">made clearer.</span></h2>
+        <p>New to antibody research? Start with these essentials. Search a term or open a card to learn more.</p>
+        <div class="glossary-search"><span>⌕</span><input id="glossarySearch" type="search" placeholder="Search a biology term..." aria-label="Search glossary"></div>
+      </div>
+      <div class="glossary-grid" id="glossaryGrid">
+        <article class="glossary-card"><span class="term-tag">MOLECULE</span><h3>Antibody</h3><p>A protein made by the immune system that can recognize and bind to a specific antigen.</p><button class="learn-more" data-more="Antibodies have specific binding regions. In medicine, engineered antibodies can be designed to recognize selected molecules and influence biological processes.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">MOLECULE</span><h3>Antigen</h3><p>A molecule or molecular structure that can be recognized by an antibody or immune receptor.</p><button class="learn-more" data-more="Antigens may be found on the surface of cells, on pathogens, or in other biological contexts. A target antigen is the molecule an antibody is designed to bind.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">THERAPEUTIC</span><h3>Bispecific antibody</h3><p>An engineered antibody designed to bind two different antigens or targets.</p><button class="learn-more" data-more="The two binding specificities can be used in different ways. Some BsAbs connect immune cells with tumour cells; others block two targets or pathways.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">DISCOVERY</span><h3>Target pair</h3><p>The two selected biological targets that a bispecific antibody is intended to recognize.</p><button class="learn-more" data-more="Selecting a pair involves more than checking whether both targets exist. Researchers consider expression patterns, cell types, biological mechanisms and potential safety risks.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">BIOLOGY</span><h3>Antigen expression</h3><p>The presence and amount of a target molecule produced by a cell.</p><button class="learn-more" data-more="Expression can vary across cell types and tissues. Knowing where a target is expressed can help researchers assess possible activity and on-target effects in normal tissues.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">DATA</span><h3>scRNA-seq</h3><p>Single-cell RNA sequencing measures gene-expression patterns in individual cells.</p><button class="learn-more" data-more="Unlike bulk sequencing, scRNA-seq can reveal differences between individual cells and help identify cell populations in a complex tissue such as the tumour microenvironment.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">MACHINE LEARNING</span><h3>XGBoost</h3><p>A machine-learning algorithm based on an ensemble of decision trees.</p><button class="learn-more" data-more="XGBoost builds trees sequentially, with later trees helping correct errors made by earlier ones. The BSPAI paper evaluated XGBoost and an XGBoost pairwise-learning approach.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">MACHINE LEARNING</span><h3>Pairwise learning</h3><p>A learning approach that compares items in pairs to learn their relative ranking.</p><button class="learn-more" data-more="In the BSPAI paper, target combinations were compared using clinical-development progress, helping the model learn relative ordering when approved BsAb examples were limited.">Read more <span>↗</span></button></article>
+        <article class="glossary-card"><span class="term-tag">BIOLOGY</span><h3>Tumour microenvironment</h3><p>The surroundings of a tumour, including immune cells, blood vessels and other cells.</p><button class="learn-more" data-more="The tumour microenvironment is a complex ecosystem. Different cell populations can influence tumour growth and treatment response, so target expression by cell type can matter.">Read more <span>↗</span></button></article>
+      </div>
+      <div class="glossary-empty" id="glossaryEmpty" hidden>No matching terms. Try another search.</div>
+    </section>
+
+    <section class="closing-cta">
+      <div class="closing-decoration">✳</div><div class="eyebrow">CURIOUS MINDS. BETTER QUESTIONS.</div>
+      <h2>Every discovery starts<br>with a <span>good connection.</span></h2>
+      <p>Explore target combinations, understand the biology and keep asking better research questions.</p>
+      <a class="button button-dark" href="#predict">Explore target pairs <span>→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#home"><span class="brand-mark"><span></span><span></span></span><span>BiSpec<span class="brand-light">Pairwise</span><small>AI RESEARCH STUDIO</small></span></a>
+    <p>An educational frontend concept for exploring bispecific antibody target-pair research.</p>
+    <div class="footer-links"><a href="#about">About</a><a href="#predict">Pair explorer</a><a href="#leaderboard">Leaderboard</a><a href="#glossary">Glossary</a></div>
+    <div class="copyright">© 2026 BiSpec Pairwise AI · Educational demo only</div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="eyebrow">GLOSSARY NOTE</div><h2 id="modalTitle">Term</h2><p id="modalText"></p><button class="button button-primary modal-done" id="modalDone">Got it</button></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

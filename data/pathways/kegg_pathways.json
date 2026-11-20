@@ -1,0 +1,71 @@
+{
+  "hsa04514_Cell_adhesion_molecules": [
+    "CD274", "PDCD1", "CTLA4", "CD80", "CD86", "CD28", "ICOS", "PVR", "NECTIN2",
+    "CD226", "TIGIT", "CD96", "CD4", "CD8A", "CD8B", "CD2", "CD6", "ITGAL",
+    "ITGB2", "ITGA4", "ITGAV", "ITGB1", "ICAM1", "VCAM1", "PECAM1", "CDH1",
+    "CDH2", "CDH3", "CDH5", "ALCAM", "MCAM", "NCAM1", "L1CAM", "SELE", "SELP",
+    "HLA-A", "HLA-E", "HLA-G", "B2M", "CD276", "SDC1", "CLDN18", "CLDN6",
+    "CLDN4", "CLDN3", "NECTIN4", "PTPRC", "SIGLEC1", "CD40", "CD40LG", "CD58",
+    "CEACAM1"
+  ],
+  "hsa05235_PDL1_PD1_checkpoint_cancer": [
+    "CD274", "PDCD1", "CTLA4", "CD28", "CD80", "CD86", "EGFR", "MET", "ALK",
+    "RET", "ROS1", "ERBB2", "ERBB3", "CD3E", "CD3D", "CD3G", "CD247", "IFNGR1",
+    "LAG3", "HAVCR2", "TIGIT", "TNFRSF9", "PTPRC", "HLA-A", "B2M"
+  ],
+  "hsa04660_TCR_signaling_pathway": [
+    "CD3E", "CD3D", "CD3G", "CD247", "CD4", "CD8A", "CD8B", "CD28", "CTLA4",
+    "PDCD1", "ICOS", "CD40LG", "PTPRC", "TRAC", "TRBC1", "CD2", "CD5", "LAG3",
+    "TNFRSF9", "TNFRSF4", "TNFRSF18", "IL2RA"
+  ],
+  "hsa04012_ErbB_signaling_pathway": [
+    "EGFR", "ERBB2", "ERBB3", "ERBB4", "MET", "IGF1R", "AXL", "ADAM17", "ADAM10"
+  ],
+  "hsa04060_Cytokine_cytokine_receptor_interaction": [
+    "VEGFA", "VEGFB", "VEGFC", "KDR", "FLT1", "FLT4", "TGFB1", "TGFBR1", "TGFBR2",
+    "IL2RA", "IL2RB", "IL2RG", "IL7R", "IL6R", "IL6ST", "IL10RA", "IL13RA2",
+    "IL15RA", "IL1R1", "IL1RAP", "IFNAR1", "IFNGR1", "TNFRSF1A", "TNFRSF1B",
+    "TNFRSF4", "TNFRSF8", "TNFRSF9", "TNFRSF10A", "TNFRSF10B", "TNFRSF11A",
+    "TNFRSF12A", "TNFRSF13B", "TNFRSF13C", "TNFRSF14", "TNFRSF17", "TNFRSF18",
+    "TNFSF13B", "FAS", "FASLG", "CD27", "CD40", "CD40LG", "CD70", "CCR2", "CCR4",
+    "CCR5", "CCR7", "CCR8", "CXCR3", "CXCR4", "CXCR5", "CXCR6", "CX3CR1",
+    "CXCL9", "CXCL10", "CXCL13", "CCL2", "CCL5", "CSF1R", "CSF2RA", "IL18R1",
+    "IL12RB1", "IL23R", "IL4R", "IL17RA", "ACVR1", "ACVRL1", "BMPR1A", "ENG"
+  ],
+  "hsa04370_VEGF_signaling_pathway": [
+    "VEGFA", "VEGFB", "VEGFC", "KDR", "FLT1", "FLT4", "NRP1", "NRP2",
+    "ANGPT1", "ANGPT2", "TEK", "PECAM1", "CDH5", "ITGAV", "ITGB3"
+  ],
+  "hsa04650_NK_cell_mediated_cytotoxicity": [
+    "KLRC1", "KLRD1", "KLRK1", "NCR1", "NCR3", "FCGR3A", "KIR2DL1", "KIR2DL3",
+    "KIR3DL1", "CD244", "CD48", "CD226", "PVR", "NECTIN2", "TIGIT", "MICA",
+    "MICB", "ULBP1", "ULBP2", "HLA-A", "HLA-E", "HLA-G", "B2M", "FAS", "FASLG",
+    "TNFRSF10A", "TNFRSF10B", "ITGAL", "ITGB2", "ICAM1", "IFNGR1"
+  ],
+  "hsa04151_PI3K_Akt_RTK_pathway": [
+    "EGFR", "MET", "ERBB2", "ERBB3", "ERBB4", "FGFR1", "FGFR2", "FGFR3", "FGFR4",
+    "IGF1R", "INSR", "PDGFRA", "PDGFRB", "KIT", "FLT3", "CSF1R", "AXL", "MERTK",
+    "TYRO3", "KDR", "FLT1", "FLT4", "TEK", "ALK", "RET", "NTRK1", "NTRK2",
+    "NTRK3", "ROS1", "EPHA2", "ITGAV", "ITGB1", "ITGB3", "ITGA4", "ITGA5",
+    "ITGA6", "VEGFA", "ANGPT1", "ANGPT2", "SPP1", "FN1", "COL1A1"
+  ],
+  "hsa04662_B_cell_receptor_signaling": [
+    "CD19", "CD22", "CD79B", "MS4A1", "CR2", "FCGR2B", "TNFRSF13B", "TNFRSF13C",
+    "TNFRSF17", "CD40", "CD38", "SLAMF7"
+  ],
+  "hsa04640_Hematopoietic_cell_lineage": [
+    "CD3E", "CD3D", "CD3G", "CD4", "CD8A", "CD8B", "CD19", "MS4A1", "CD22",
+    "CD33", "CD38", "CD44", "CD14", "ITGAM", "ITGAX", "CSF1R", "CSF2RA",
+    "FLT3", "KIT", "IL2RA", "IL7R", "IL6R", "FCGR1A", "CD1D", "CR2", "FCER2"
+  ],
+  "hsa04330_Notch_and_Wnt_stem_signaling": [
+    "DLL3", "DLL4", "NOTCH1", "NOTCH2", "NOTCH3", "JAG1", "ADAM10", "ADAM17",
+    "FZD7", "FZD10", "ROR1", "ROR2", "LGR5", "PTK7", "SMO", "PTCH1", "PROM1"
+  ],
+  "hsa04670_Leukocyte_transendothelial_and_phagocytosis": [
+    "CD47", "SIRPA", "LILRB1", "LILRB2", "LILRB4", "CD24", "SIGLEC7", "SIGLEC9",
+    "SIGLEC15", "MERTK", "TYROBP", "TREM1", "TREM2", "FCGR1A", "FCGR2A",
+    "FCGR2B", "FCGR3A", "MARCO", "MSR1", "CD163", "MRC1", "CD68", "ITGAM",
+    "ITGAX", "ICAM1", "VCAM1", "PECAM1", "CDH5"
+  ]
+}

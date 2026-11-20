@@ -1,0 +1,400 @@
+{
+  "datasetId": "GSE131907 (NSCLC scRNA-seq)",
+  "seed": 42,
+  "modelVersion": "BSPAI-PairwiseXGB-v1.0.0",
+  "qcStats": {
+    "rawCells": 720,
+    "filteredCells": 36,
+    "retainedCells": 684,
+    "geneCount": 327,
+    "totalCandidatePairs": 53301,
+    "tissueCounts": {
+      "tumor_lung": 294,
+      "normal_lung": 163,
+      "lymph_node": 124,
+      "brain_mets": 103
+    },
+    "cellTypeCounts": {
+      "exhausted_cd8_t": 188,
+      "treg": 105,
+      "macrophage_myeloid": 172,
+      "epithelial": 219
+    }
+  },
+  "benchmarks": [
+    {
+      "model": "Pairwise XGBoost (BSPAI)",
+      "meanAuc": 0.8941,
+      "stdAuc": 0.0389,
+      "foldAucs": [
+        0.9122,
+        0.9305,
+        0.8224,
+        0.8849,
+        0.9206
+      ],
+      "paperRefAuc": 0.8929,
+      "meanNdcg10": 0.5681,
+      "meanNdcg20": 0.6708,
+      "meanNdcg100": 0.6765
+    },
+    {
+      "model": "Pointwise XGBoost",
+      "meanAuc": 0.8965,
+      "stdAuc": 0.0441,
+      "foldAucs": [
+        0.9054,
+        0.9498,
+        0.8456,
+        0.8452,
+        0.9365
+      ],
+      "paperRefAuc": 0.841,
+      "meanNdcg10": 0.524,
+      "meanNdcg20": 0.6537,
+      "meanNdcg100": 0.6573
+    },
+    {
+      "model": "GBDT",
+      "meanAuc": 0.8804,
+      "stdAuc": 0.0453,
+      "foldAucs": [
+        0.8885,
+        0.9537,
+        0.8456,
+        0.8214,
+        0.8929
+      ],
+      "paperRefAuc": 0.828,
+      "meanNdcg10": 0.5234,
+      "meanNdcg20": 0.6258,
+      "meanNdcg100": 0.6483
+    },
+    {
+      "model": "Random Forest",
+      "meanAuc": 0.9009,
+      "stdAuc": 0.0196,
+      "foldAucs": [
+        0.9223,
+        0.8842,
+        0.8764,
+        0.8968,
+        0.9246
+      ],
+      "paperRefAuc": 0.819,
+      "meanNdcg10": 0.6254,
+      "meanNdcg20": 0.7138,
+      "meanNdcg100": 0.7214
+    },
+    {
+      "model": "DNN (MLP 256-128-64-32-1)",
+      "meanAuc": 0.8743,
+      "stdAuc": 0.0579,
+      "foldAucs": [
+        0.9223,
+        0.9459,
+        0.888,
+        0.7976,
+        0.8175
+      ],
+      "paperRefAuc": 0.794,
+      "meanNdcg10": 0.5434,
+      "meanNdcg20": 0.642,
+      "meanNdcg100": 0.6597
+    },
+    {
+      "model": "Logistic Regression",
+      "meanAuc": 0.8943,
+      "stdAuc": 0.0339,
+      "foldAucs": [
+        0.9426,
+        0.8842,
+        0.9228,
+        0.8492,
+        0.873
+      ],
+      "paperRefAuc": 0.742,
+      "meanNdcg10": 0.6192,
+      "meanNdcg20": 0.725,
+      "meanNdcg100": 0.7327
+    },
+    {
+      "model": "Decision Tree",
+      "meanAuc": 0.76,
+      "stdAuc": 0.0715,
+      "foldAucs": [
+        0.772,
+        0.8282,
+        0.7259,
+        0.6409,
+        0.8333
+      ],
+      "paperRefAuc": 0.688,
+      "meanNdcg10": 0.514,
+      "meanNdcg20": 0.6559,
+      "meanNdcg100": 0.6559
+    },
+    {
+      "model": "Single Feature (double_ratio)",
+      "meanAuc": 0.4008,
+      "stdAuc": 0.0668,
+      "foldAucs": [
+        0.4324,
+        0.4865,
+        0.4402,
+        0.3135,
+        0.3313
+      ],
+      "paperRefAuc": 0.5476,
+      "meanNdcg10": 0.0823,
+      "meanNdcg20": 0.1081,
+      "meanNdcg100": 0.376
+    }
+  ],
+  "ablation": [
+    {
+      "step": "1. Double-positive only",
+      "featureCount": 1,
+      "meanAuc": 0.4008,
+      "stdAuc": 0.0668,
+      "paperRefAuc": 0.5476
+    },
+    {
+      "step": "2. + Safety (score_safe)",
+      "featureCount": 4,
+      "meanAuc": 0.927,
+      "stdAuc": 0.017,
+      "paperRefAuc": 0.6706
+    },
+    {
+      "step": "3. + Mechanism (KEGG/GO)",
+      "featureCount": 8,
+      "meanAuc": 0.902,
+      "stdAuc": 0.0344,
+      "paperRefAuc": 0.7174
+    },
+    {
+      "step": "4. + Gene embedding (vector_score)",
+      "featureCount": 9,
+      "meanAuc": 0.8979,
+      "stdAuc": 0.0433,
+      "paperRefAuc": 0.7372
+    },
+    {
+      "step": "5. + Single-cell overall expression",
+      "featureCount": 16,
+      "meanAuc": 0.903,
+      "stdAuc": 0.0431,
+      "paperRefAuc": 0.8619
+    },
+    {
+      "step": "6. + Grouped tissue & cell-type features",
+      "featureCount": 60,
+      "meanAuc": 0.8904,
+      "stdAuc": 0.0535,
+      "paperRefAuc": 0.8929
+    }
+  ],
+  "topFeatureImportances": [
+    {
+      "feature": "dy_tumor_minus_normal",
+      "weight": 153,
+      "group": "safety"
+    },
+    {
+      "feature": "score_safe",
+      "weight": 128,
+      "group": "safety"
+    },
+    {
+      "feature": "kegg_cooccur",
+      "weight": 120,
+      "group": "mechanism"
+    },
+    {
+      "feature": "sum_single_exp_tumor_lung",
+      "weight": 116,
+      "group": "activity"
+    },
+    {
+      "feature": "vector_score",
+      "weight": 111,
+      "group": "embedding"
+    },
+    {
+      "feature": "dx_tumor_minus_normal",
+      "weight": 104,
+      "group": "safety"
+    },
+    {
+      "feature": "double_ratio_overall",
+      "weight": 101,
+      "group": "activity"
+    },
+    {
+      "feature": "double_ratio_tumor_lung",
+      "weight": 82,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_overall",
+      "weight": 71,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_brain_mets",
+      "weight": 65,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_ratio_overall",
+      "weight": 65,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_exp_exhausted_cd8_t",
+      "weight": 62,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_ratio_lymph_node",
+      "weight": 62,
+      "group": "activity"
+    },
+    {
+      "feature": "pearson_exhausted_cd8_t",
+      "weight": 61,
+      "group": "correlation"
+    },
+    {
+      "feature": "pearson_treg",
+      "weight": 61,
+      "group": "correlation"
+    },
+    {
+      "feature": "pearson_epithelial",
+      "weight": 59,
+      "group": "correlation"
+    },
+    {
+      "feature": "double_ratio_macrophage_myeloid",
+      "weight": 58,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_exp_macrophage_myeloid",
+      "weight": 58,
+      "group": "activity"
+    },
+    {
+      "feature": "pathway_cooccur",
+      "weight": 58,
+      "group": "mechanism"
+    },
+    {
+      "feature": "min_single_exp_normal_lung",
+      "weight": 56,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_treg",
+      "weight": 55,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_ratio_macrophage_myeloid",
+      "weight": 52,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_lymph_node",
+      "weight": 51,
+      "group": "activity"
+    },
+    {
+      "feature": "double_ratio_brain_mets",
+      "weight": 49,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_exp_brain_mets",
+      "weight": 48,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_macrophage_myeloid",
+      "weight": 48,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_ratio_normal_lung",
+      "weight": 47,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_normal_lung",
+      "weight": 46,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_ratio_lymph_node",
+      "weight": 44,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_exp_exhausted_cd8_t",
+      "weight": 43,
+      "group": "activity"
+    },
+    {
+      "feature": "double_ratio_lymph_node",
+      "weight": 39,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_ratio_brain_mets",
+      "weight": 39,
+      "group": "activity"
+    },
+    {
+      "feature": "single_ratio_max",
+      "weight": 37,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_ratio_tumor_lung",
+      "weight": 37,
+      "group": "activity"
+    },
+    {
+      "feature": "sum_single_ratio_treg",
+      "weight": 36,
+      "group": "activity"
+    },
+    {
+      "feature": "double_ratio_normal_lung",
+      "weight": 35,
+      "group": "activity"
+    },
+    {
+      "feature": "double_ratio_treg",
+      "weight": 33,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_exp_tumor_lung",
+      "weight": 33,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_exp_treg",
+      "weight": 30,
+      "group": "activity"
+    },
+    {
+      "feature": "min_single_exp_overall",
+      "weight": 28,
+      "group": "activity"
+    }
+  ]
+}

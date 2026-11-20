@@ -1,0 +1,5 @@
+{
+  "summary":  "Structured 6-8 minute demo video script and walkthrough for BiSpec Pairwise AI (BSPAI), covering problem framing, live Predict workflow on CD274+CTLA4, Leaderboard filtering and CSV export, Model Card 5-fold CV & ablation analysis, real GEO ingestion, and TS-vs-Python parity verification.",
+  "updatedAt":  "2026-11-13T15:02:46.653198514Z",
+  "userFacing":  true
+}

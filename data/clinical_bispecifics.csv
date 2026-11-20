@@ -1,0 +1,63 @@
+drug,gene1,gene2,clinical_stage,mechanism_type,indication_notes,needs_verification
+Cadonilimab (AK104),PDCD1,CTLA4,1,tumor-immunotherapy,PD-1 x CTLA-4 approved in China for cervical and gastric cancer,false
+Amivantamab,EGFR,MET,1,TAA+TAA,EGFR x MET FDA-approved for EGFR exon 20ins NSCLC,false
+Glofitamab,MS4A1,CD3E,1,bridge-two-cells,CD20 x CD3 FDA-approved for relapsed/refractory DLBCL,false
+Teclistamab,TNFRSF17,CD3E,1,bridge-two-cells,BCMA x CD3 FDA-approved for relapsed/refractory multiple myeloma,false
+Talquetamab,GPRC5D,CD3E,1,bridge-two-cells,GPRC5D x CD3 FDA-approved for relapsed/refractory multiple myeloma,false
+Blinatumomab,CD19,CD3E,1,bridge-two-cells,CD19 x CD3 FDA-approved for B-cell ALL,false
+Tarlatamab,DLL3,CD3E,1,bridge-two-cells,DLL3 x CD3 FDA-approved for extensive-stage SCLC,false
+Ivonescimab (AK112),PDCD1,VEGFA,1,tumor-immunotherapy,PD-1 x VEGF approved in China and Phase 3 global NSCLC,true
+Tebentafusp,PMEL,CD3E,1,bridge-two-cells,gp100 x CD3 FDA-approved for uveal melanoma (TCR-CD3 fusion),true
+Mosunetuzumab,MS4A1,CD3D,1,bridge-two-cells,CD20 x CD3 FDA-approved for follicular lymphoma (mapped to CD3D variant),true
+Epcoritamab,MS4A1,CD3G,1,bridge-two-cells,CD20 x CD3 FDA-approved for DLBCL (mapped to CD3G variant),true
+Catumaxomab,EPCAM,CD3E,1,bridge-two-cells,EpCAM x CD3 historically approved in EU (later withdrawn),true
+KN046,CD274,CTLA4,2,tumor-immunotherapy,PD-L1 x CTLA-4 Phase 3 in NSCLC and PDAC,true
+Zenocutuzumab,ERBB2,ERBB3,2,TAA+TAA,HER2 x HER3 bispecific in NRG1 fusion solid tumors,false
+Zanidatamab,ERBB2,ERBB3,2,TAA+TAA,HER2 biparatopic proxy paired with HER3 dimerization partner,true
+Bintrafusp alfa (M7824),CD274,TGFBR2,2,tumor-immunotherapy,PD-L1 x TGF-beta receptor II trap,true
+Tebotelimab (MGD013),PDCD1,LAG3,2,tumor-immunotherapy,PD-1 x LAG-3 Phase 2/3 checkpoint bispecific,true
+Rilvegostomig / PD1xTIGIT,PDCD1,TIGIT,2,tumor-immunotherapy,PD-1 x TIGIT Phase 2/3 NSCLC combination bispecific,true
+Odronextamab,MS4A1,CD3E,2,bridge-two-cells,CD20 x CD3 (pair stage governed by Glofitamab stage 1),true
+Petosemtamab (MCLA-158),EGFR,LGR5,3,TAA+TAA,EGFR x LGR5 Phase 2/3 HNSCC bispecific,false
+Sabatolimab-bispecific proxy,PDCD1,HAVCR2,3,tumor-immunotherapy,PD-1 x TIM-3 bispecific checkpoint blockade,true
+Navicixizumab,DLL4,VEGFA,3,TAA+TAA,DLL4 x VEGF anti-angiogenic bispecific,true
+FS118,CD274,LAG3,3,tumor-immunotherapy,PD-L1 x LAG-3 Phase 1/2 bispecific,true
+IBI318,PDCD1,CD274,3,tumor-immunotherapy,PD-1 x PD-L1 cis/trans dual checkpoint bispecific,true
+Acasunlimab (GEN1046),CD274,TNFRSF9,3,tumor-immunotherapy,PD-L1 x 4-1BB conditional T cell costimulator,false
+Cibisatamab,CEACAM5,CD3E,3,bridge-two-cells,CEA x CD3 T cell engager in colorectal/GI tumors,false
+Pasotuxizumab,FOLH1,CD3E,3,bridge-two-cells,PSMA x CD3 T cell engager in mCRPC,true
+Ubamatamab,MUC16,CD3E,3,bridge-two-cells,MUC16 x CD3 bispecific in ovarian cancer,true
+IMM0306,CD47,MS4A1,3,bridge-two-cells,CD47 x CD20 innate-adaptive bispecific,true
+NI-1701,CD47,CD19,3,bridge-two-cells,CD47 x CD19 bispecific,true
+IBI322,CD47,CD274,3,tumor-immunotherapy,CD47 x PD-L1 macrophage-T cell dual checkpoint,true
+HLX301,TIGIT,CD274,3,tumor-immunotherapy,TIGIT x PD-L1 bispecific,true
+BL-B01D1,EGFR,ERBB3,3,TAA+TAA,EGFR x HER3 bispecific antibody-drug conjugate,false
+PM8002,CD274,VEGFA,3,tumor-immunotherapy,PD-L1 x VEGF bispecific in NSCLC and SCLC,false
+CLDN18xCD3 (AMG 910),CLDN18,CD3E,3,bridge-two-cells,Claudin-18.2 x CD3 T cell engager,true
+GPC3xCD3 (ERY974),GPC3,CD3E,3,bridge-two-cells,Glypican-3 x CD3 T cell engager in HCC,true
+CD38xCD3,CD38,CD3E,3,bridge-two-cells,CD38 x CD3 T cell engager in myeloma,true
+CD33xCD3 (AMG 330),CD33,CD3E,3,bridge-two-cells,CD33 x CD3 T cell engager in AML,true
+MUC1xCD3,MUC1,CD3E,4,bridge-two-cells,MUC1 x CD3 preclinical solid-tumor engager,true
+TACSTD2xCD3,TACSTD2,CD3E,4,bridge-two-cells,TROP-2 x CD3 preclinical solid-tumor engager,true
+FAPxCD40 (RO7300490),FAP,CD40,4,bridge-two-cells,FAP x CD40 stroma-targeted myeloid agonist,true
+CD70xCD3,CD70,CD3E,4,bridge-two-cells,CD70 x CD3 preclinical/IND T cell engager,true
+AXLxMET,AXL,MET,4,TAA+TAA,AXL x MET dual receptor tyrosine kinase preclinical pair,true
+CEACAM5xCD47,CEACAM5,CD47,4,tumor-immunotherapy,CEA x CD47 tumor-targeted phagocytosis pair,true
+EGFRxCD47,EGFR,CD47,4,tumor-immunotherapy,EGFR x CD47 preclinical innate checkpoint pair,true
+MSLNxCD40,MSLN,CD40,4,bridge-two-cells,Mesothelin x CD40 preclinical APC engager,true
+CD276xCD3,CD276,CD3E,4,bridge-two-cells,B7-H3 x CD3 solid tumor T cell engager,true
+FOLR1xCD3,FOLR1,CD3E,4,bridge-two-cells,Folate receptor alpha x CD3 engager,true
+NECTIN4xCD3,NECTIN4,CD3E,4,bridge-two-cells,Nectin-4 x CD3 engager,true
+CTLA4xLAG3,CTLA4,LAG3,4,tumor-immunotherapy,CTLA-4 x LAG-3 preclinical dual checkpoint,true
+PDCD1xCCR8,PDCD1,CCR8,4,tumor-immunotherapy,PD-1 x CCR8 Treg-depleting checkpoint pair,true
+CD274xCD276,CD274,CD276,4,tumor-immunotherapy,PD-L1 x B7-H3 preclinical dual checkpoint,true
+Ertumaxomab,ERBB2,CD3E,5,bridge-two-cells,HER2 x CD3 discontinued clinical program,true
+Duligotuzumab,EGFR,ERBB3,5,TAA+TAA,EGFR x HER3 discontinued (superseded by BL-B01D1 ADC; verify stage coding),true
+Vanucizumab,VEGFA,ANGPT2,5,TAA+TAA,VEGF x ANG2 discontinued oncology program,true
+Istiratumab (MM-141),IGF1R,ERBB3,5,TAA+TAA,IGF-1R x HER3 discontinued in pancreatic cancer,true
+Pritumumab/Discontinued_ITGAV_KDR,ITGAV,KDR,5,TAA+TAA,Integrin alpha-V x VEGFR2 stalled/discontinued pair proxy,true
+Discontinued_CD44_PROM1,CD44,PROM1,5,TAA+TAA,CD44 x CD133 stalled stem-cell target pair proxy,true
+Discontinued_CXCR4_CCR5,CXCR4,CCR5,5,tumor-immunotherapy,CXCR4 x CCR5 discontinued chemokine pair proxy,true
+Discontinued_IL6R_TNFRSF1A,IL6R,TNFRSF1A,5,TAA+TAA,IL-6R x TNFR1 discontinued inflammatory proxy,true
+Discontinued_CSF1R_CCR2,CSF1R,CCR2,5,tumor-immunotherapy,CSF1R x CCR2 discontinued myeloid depletion proxy,true
+Discontinued_PDGFRA_KIT,PDGFRA,KIT,5,TAA+TAA,PDGFRA x c-KIT stalled kinase bispecific proxy,true

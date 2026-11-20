@@ -1,0 +1,6 @@
+{
+  "summary":  "Revised Implementation Plan for BiSpec Pairwise AI (BSPAI) incorporating researcher-only audience, domain-native UI without pervasive tooltips (preserving standalone Glossary tab and README glossary), env-configured & validated Gemini model ID, dynamically computed candidate-pair counts, TS-vs-Python parity testing, tested real GEO ingestion path, CSV export, and report provenance stamping.",
+  "updatedAt":  "2026-11-13T14:50:28.338563742Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
