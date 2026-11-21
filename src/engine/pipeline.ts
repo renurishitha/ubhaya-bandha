@@ -38,7 +38,7 @@ import type {
   RocCurveSeries,
 } from './types.ts';
 
-export const MODEL_VERSION = 'BSPAI-PairwiseXGB-v1.0.0';
+export const MODEL_VERSION = 'BSPAI-PairwiseXGB-v1.1.0';
 
 export interface PipelineRuntime {
   seed: number;
@@ -159,7 +159,7 @@ export function runAndPersistPipeline(
     5
   );
 
-  // Score all G*(G-1)/2 candidate pairs
+  // Score all G*(G-1)/2 candidate pairs (guaranteed in [0, 1])
   const numFeatures = featureCtx.featureNames.length;
   const scored: Array<{
     rowIdx: number;
@@ -277,7 +277,6 @@ function hydrateFromArtifacts(
     pairRankLookup,
   };
 
-  // Hydrate top 250 pairs cleanly for fast Leaderboard / filtering
   const topSlice = saved.rankedSummary.slice(0, 250);
   runtime.rankedPairs = topSlice.map((entry) =>
     buildPredictionObject(runtime, entry.g1, entry.g2, entry.score, entry.rank)

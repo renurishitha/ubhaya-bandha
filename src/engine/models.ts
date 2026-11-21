@@ -315,13 +315,14 @@ export function predictXgbScores(
   model: TrainedXgbModel,
   X: number[][]
 ): number[] {
-  const out = new Array<number>(X.length).fill(model.baseScore);
+  const out = new Array<number>(X.length).fill(0);
   for (let i = 0; i < X.length; i++) {
     let s = model.baseScore;
     for (const tree of model.trees) {
       s += model.learningRate * predictTreeRow(tree, X[i]);
     }
-    out[i] = model.kind === 'pairwise_xgb' ? s : sigmoid(s);
+    // Strictly bound all outputs to [0, 1] via sigmoid so pairwise margins are never negative
+    out[i] = sigmoid(s);
   }
   return out;
 }
@@ -334,7 +335,8 @@ export function predictXgbSingleRow(
   for (const tree of model.trees) {
     s += model.learningRate * predictTreeRow(tree, row);
   }
-  return model.kind === 'pairwise_xgb' ? s : sigmoid(s);
+  // Strictly bound output to [0, 1] via sigmoid so pairwise margins are never negative
+  return sigmoid(s);
 }
 
 // --- Baseline 1: Logistic Regression (L2, C=0.1 -> lambda=10, max_iter=1000) ---
@@ -416,7 +418,6 @@ function buildCartTree(
   const p = X[0].length;
   let feats = Array.from({ length: p }, (_, i) => i);
   if (rng && maxFeatures && maxFeatures < p) {
-    // Fisher-Yates partial sample
     for (let i = 0; i < maxFeatures; i++) {
       const j = i + rng.randint(0, p - i);
       const tmp = feats[i];
@@ -548,7 +549,6 @@ export function trainDnnMlp(
     return { W, b, inDim, outDim };
   });
 
-  // Nadam state
   const mW = layers.map((l) => new Float64Array(l.W.length));
   const vW = layers.map((l) => new Float64Array(l.W.length));
   const mb = layers.map((l) => new Float64Array(l.b.length));
@@ -557,7 +557,7 @@ export function trainDnnMlp(
   const beta1 = 0.9;
   const beta2 = 0.999;
   const eps = 1e-8;
-  const alpha = 0.1; // LeakyReLU slope
+  const alpha = 0.1;
   const dropoutKeep = 0.8;
   let step = 0;
 
@@ -565,7 +565,6 @@ export function trainDnnMlp(
   const order = Array.from({ length: n }, (_, i) => i);
 
   for (let ep = 0; ep < epochs; ep++) {
-    // Mini-batch SGD with Nadam (batch size = 32)
     for (let start = 0; start < n; start += 32) {
       const end = Math.min(n, start + 32);
       const bLen = end - start;
@@ -579,7 +578,6 @@ export function trainDnnMlp(
         const acts: Float64Array[] = [Float64Array.from(Xs[rowIdx])];
         const masks: Array<Float64Array | null> = [];
 
-        // Forward
         for (let l = 0; l < layers.length; l++) {
           const { W, b, inDim, outDim } = layers[l];
           const prev = acts[l];
@@ -603,7 +601,6 @@ export function trainDnnMlp(
           masks.push(mask);
         }
 
-        // Backward
         let delta = new Float64Array([acts[layers.length][0] - y[rowIdx]]);
         for (let l = layers.length - 1; l >= 0; l--) {
           const { W, inDim, outDim } = layers[l];
@@ -631,7 +628,6 @@ export function trainDnnMlp(
         }
       }
 
-      // Nadam update
       const b1Pow = 1 - Math.pow(beta1, step);
       const b2Pow = 1 - Math.pow(beta2, step);
       for (let l = 0; l < layers.length; l++) {
