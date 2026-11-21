@@ -27,6 +27,36 @@ const DEPRECATED_GEMINI_MODELS = new Set([
   'gemini-2.0-flash-thinking',
 ]);
 
+const CLINICAL_STAGE_LABELS: Record<number, string> = {
+  1: 'Stage 1 · Approved / BLA',
+  2: 'Stage 2 · Phase 3 / 2–3',
+  3: 'Stage 3 · Phase 1 / 2',
+  4: 'Stage 4 · Preclinical / IND',
+  5: 'Stage 5 · Discontinued',
+};
+
+function formatStageSummary(pred: CandidatePrediction): {
+  stageTitle: string;
+  stageDetail: string;
+} {
+  if (pred.inClinicalTrial && pred.clinicalStage) {
+    const stageTitle =
+      CLINICAL_STAGE_LABELS[pred.clinicalStage] ?? `Stage ${pred.clinicalStage}`;
+    const drugs =
+      pred.clinicalDrugs?.length > 0
+        ? pred.clinicalDrugs.join(', ')
+        : 'Validated clinical bispecific benchmark';
+    return {
+      stageTitle,
+      stageDetail: `${drugs}${pred.needsVerification ? ' (flagged for verification)' : ''}`,
+    };
+  }
+  return {
+    stageTitle: 'Stage 0 · Novel Discovery Candidate',
+    stageDetail: 'Unbenchmarked pair scored via 5-stage pairwise hierarchy',
+  };
+}
+
 export function resolveAndValidateGeminiModel(
   rawModel = process.env.GEMINI_MODEL
 ): ValidGeminiModel {
@@ -98,7 +128,7 @@ export async function generateGroundedRagReport(
   ).toFixed(2);
   const validatedModel = resolveAndValidateGeminiModel();
 
-  const cacheKey = `${prediction.pairKey}__${validatedModel}__${enableWebSearch ? 'web' : 'local'}__${hasUsableApiKey() ? 'key' : 'nokey'}`;
+  const cacheKey = `${prediction.pairKey}__${modelVersion}__${validatedModel}__${enableWebSearch ? 'web' : 'local'}__${hasUsableApiKey() ? 'key' : 'nokey'}`;
   const cached = reportCache.get(cacheKey);
   if (cached) {
     return cached;
@@ -153,7 +183,7 @@ export async function generateGroundedRagReport(
           contents: retrievedFacts,
           config: {
             systemInstruction:
-              'You are a computational oncology research analyst summarizing BiSpec Pairwise AI (BSPAI) target-pair rankings. Write clearly for both biotech decision-makers and computational biologists. Use ONLY the provided numeric metrics (including Pairwise Druggability Score), discretized bin labels, gene metadata, AlphaFold GNN fit, and seeded clinical status. Never invent trial results or NCT numbers.',
+              'You are a computational oncology research analyst summarizing BiSpec Pairwise AI (BSPAI) target-pair rankings. Write clearly for both biotech decision-makers and computational biologists. Use ONLY the provided numeric metrics (including Pairwise Druggability Score in [0, 1]), discretized bin labels, gene metadata, AlphaFold GNN fit, and 5-stage clinical progression status (Stage 1-5 or Stage 0 Novel Candidate). Never invent trial results or NCT numbers.',
             ...(enableWebSearch ? { tools: [{ googleSearch: {} }] } : {}),
           },
         });
@@ -191,11 +221,9 @@ export async function generateGroundedRagReport(
         }
       } catch (err) {
         if (isQuotaOrRateLimitError(err)) {
-          // Pause retries against this quota-exhausted model for 30 minutes and fall back cleanly
           modelCooldownUntil.set(modelId, Date.now() + 30 * 60 * 1000);
           continue;
         }
-        // Transient non-quota error: fall back quietly to deterministic report
         break;
       }
     }
@@ -259,15 +287,17 @@ function buildReadableEnglishReport(
   const safety = f.score_safe ?? 0;
   const doubleMax = f.double_ratio_max ?? 0;
   const pearson = f.pearson_overall ?? 0;
+  const stageInfo = formatStageSummary(pred);
 
+  // Calibrated [0, 1] probability tiers
   const strengthTier =
-    pred.score >= 4.0
+    pred.score >= 0.80
       ? 'Top-tier candidate'
-      : pred.score >= 1.5
+      : pred.score >= 0.55
         ? 'Strong candidate'
-        : pred.score >= 0.0
+        : pred.score >= 0.25
           ? 'Moderate candidate'
-          : 'Early exploratory candidate';
+          : 'Early-stage candidate';
 
   const safetySentence =
     safety >= 0.35
@@ -282,8 +312,8 @@ function buildReadableEnglishReport(
       : `Only ${(doubleMax * 100).toFixed(1)}% of cells co-express both targets in the same cell, which fits a two-cell bridging or microenvironment design better than single-cell dual blockade.`;
 
   const clinicalSentence = pred.inClinicalTrial
-    ? `This combination already has real-world clinical validation at Stage ${pred.clinicalStage} (${pred.clinicalDrugs.join(', ')}).`
-    : `This exact pair has not been tested in our seeded clinical benchmark table, representing a novel combination opportunity.`;
+    ? `Classified at **${stageInfo.stageTitle}** (${stageInfo.stageDetail}), providing direct clinical precedent in the 5-stage bispecific hierarchy.`
+    : `Classified at **${stageInfo.stageTitle}** (${stageInfo.stageDetail}) — not yet represented in clinical trials, making it a de novo bispecific hypothesis.`;
 
   const assessment = structuralGnn?.bindingAssessment;
   const verdict = assessment?.verdict;
@@ -298,12 +328,12 @@ function buildReadableEnglishReport(
       verdictStatusNote = ` 3D structural analysis classifies this pair as a **Partial Fit (${assessment.fitPercent}% structural fit)** — biologically bindable, with a membrane-spacing engineering note explained below.`;
 
       const clinicalBoostReason = pred.inClinicalTrial
-        ? `strong real-world clinical precedent (Stage ${pred.clinicalStage}: ${pred.clinicalDrugs.join(', ')}), where engineered bispecific formats (such as flexible linkers or 2:1 Fab spacing) already succeed despite tight membrane clearance`
+        ? `strong real-world clinical precedent (${stageInfo.stageTitle}: ${stageInfo.stageDetail}), where engineered bispecific formats (such as flexible linkers or 2:1 Fab spacing) already succeed despite tight membrane clearance`
         : `strong biological evidence across single-cell expression, pathway synergy, and tumor-vs-normal selectivity`;
 
       bindingSectionLines = [
         `- **3D Structural Fit — Partial Fit (${assessment.fitPercent}%)**: **What Partial Fit means:** Both **${pred.gene1}** and **${pred.gene2}** still expose reachable pockets that a bispecific antibody can engage, so binding is possible — however, at least one epitope sits close to the cell membrane or in a tight loop (${assessment.whyNote}). A standard rigid IgG format may experience mild steric crowding unless the linker length, hinge flexibility, or Fab arm spacing is tuned.`,
-        `- **Why It Earned a Score of ${pred.score.toFixed(4)} (Rank #${pred.rank.toLocaleString()}) Despite Being a Partial Fit**: The **Pairwise Druggability Score** combines **40+ biological, single-cell, safety, pathway, and structural features** rather than relying on raw pocket geometry alone. This pair earned its score because of ${clinicalBoostReason} (safety index ${safety.toFixed(2)}, mechanism \`${pred.mechanismType}\`). The **Partial Fit** flag acts as an actionable engineering guide telling researchers *how* to design the antibody format rather than disqualifying a biologically valuable pair.`,
+        `- **Why It Earned a Score of ${pred.score.toFixed(4)} (Rank #${pred.rank.toLocaleString()}) Despite Being a Partial Fit**: The **Pairwise Druggability Score** combines **63 biological, single-cell, safety, pathway, and 3D structural features** rather than relying on raw pocket geometry alone. This pair earned its score because of ${clinicalBoostReason} (safety index ${safety.toFixed(2)}, mechanism \`${pred.mechanismType}\`). The **Partial Fit** flag acts as an actionable engineering guide telling researchers *how* to design the antibody format rather than disqualifying a biologically valuable pair.`,
       ];
 
       nextStep2 = `Because 3D modeling flags a **Partial Fit**, optimize bispecific antibody geometry (flexible hinges, extended linkers, or asymmetric 2:1 Fab/scFv formats) to clear the membrane-proximal loop without steric collision.`;
@@ -343,7 +373,7 @@ function buildReadableEnglishReport(
     `- **Safety & Selectivity**: ${safetySentence}`,
     `- **Target Presence**: ${activitySentence} ${corrSentence}`,
     ...bindingSectionLines,
-    `- **Clinical Track Record**: ${clinicalSentence}`,
+    `- **Clinical Progression Stage**: ${clinicalSentence}`,
     '',
     `#### Recommended Next Steps`,
     `1. Confirm surface protein levels of ${pred.gene1} and ${pred.gene2} in patient tumor vs. healthy tissue samples.`,
@@ -372,9 +402,8 @@ function buildRetrievedPromptContext(
   structuralGnn?: PairGnnMetrics
 ): string {
   const f = pred.features;
-  const clinicalLine = pred.inClinicalTrial
-    ? `Seeded clinical benchmark status: Stage ${pred.clinicalStage} (${pred.clinicalDrugs.join('; ')})${pred.needsVerification ? ' [needs verification]' : ''}.`
-    : 'Seeded clinical benchmark status: Exploratory pair (not yet in clinical drug table).';
+  const stageInfo = formatStageSummary(pred);
+  const clinicalLine = `Clinical Progression Stage: ${stageInfo.stageTitle} — ${stageInfo.stageDetail}.`;
 
   const binLines = discretized
     .map(
@@ -413,7 +442,7 @@ Provenance:
 - Dataset: ${datasetId} (${dataMode}), Seed: ${seed}, Model: ${modelVersion}
 
 Model Prediction:
-- Pairwise Druggability Score: ${pred.score.toFixed(4)}
+- Pairwise Druggability Score: ${pred.score.toFixed(4)} (calibrated [0, 1] scale)
 - Global Rank: #${pred.rank} of ${pred.totalPairs} candidate pairs (top ${percentile}%)
 - Mechanism Class: ${pred.mechanismType}
 - ${clinicalLine}
@@ -433,7 +462,7 @@ Additional Features:
 - pearson_overall: ${(f.pearson_overall ?? 0).toFixed(4)}${gnnBlock}${partialFitInstruction}
 
 Write a clear, concise, easy-to-understand analytical report in Markdown covering:
-1. Target & Clinical Overview
+1. Target & Clinical Progression Stage Overview
 2. Key Ranking Drivers (Pairwise Druggability Score, Safety, Single-Cell Activity, Structural Fit)
 3. Risks & Experimental Next Steps`;
 }
@@ -448,6 +477,7 @@ function buildDeterministicTemplateReport(
   structuralGnn?: PairGnnMetrics
 ): string {
   const f = pred.features;
+  const stageInfo = formatStageSummary(pred);
   const findBin = (prefix: string) =>
     discretized.find((d) => d.feature === prefix || d.feature.startsWith(prefix));
 
@@ -458,8 +488,8 @@ function buildDeterministicTemplateReport(
   const singleBin = findBin('single_ratio');
 
   const clinicalSummary = pred.inClinicalTrial
-    ? `Recorded in clinical benchmark table at **Stage ${pred.clinicalStage}** (${pred.clinicalDrugs.join(', ')})${pred.needsVerification ? ' *(flagged for manual verification)*' : ''}.`
-    : `Not yet recorded in the clinical bispecific drug table, making this an exploratory candidate pair.`;
+    ? `Classified at **${stageInfo.stageTitle}** (${stageInfo.stageDetail}) in the 5-stage clinical bispecific hierarchy.`
+    : `Classified at **${stageInfo.stageTitle}** (${stageInfo.stageDetail}), representing an unbenchmarked de novo target pair.`;
 
   const assessment = structuralGnn?.bindingAssessment;
   const verdictLabel =
@@ -473,7 +503,7 @@ function buildDeterministicTemplateReport(
   if (structuralGnn && assessment) {
     gnnLine = `\n- **AlphaFold 3D & GNN Binding Fit (${verdictLabel})**: \`${structuralGnn.target1.entryId}\` (mean pLDDT **${structuralGnn.target1.meanPlddt}**) + \`${structuralGnn.target2.entryId}\` (mean pLDDT **${structuralGnn.target2.meanPlddt}**) yields **${assessment.fitPercent}%** structural fit, GNN cosine similarity **${structuralGnn.gnnCosineSim.toFixed(4)}**, and ectodomain accessibility **${structuralGnn.ectodomainAccessibility.toFixed(4)}**.`;
     if (assessment.verdict === 'conditional-bind') {
-      gnnLine += `\n- **Partial Fit Interpretation & Score Rationale**: A **Partial Fit** means both targets remain bindable, but tight membrane-proximal loop geometry requires tuned linker length or Fab arm spacing (${assessment.whyNote}). The Pairwise Druggability Score of **${pred.score.toFixed(4)}** (Rank **#${pred.rank.toLocaleString()}**) reflects the combined 40+ biological, single-cell, safety, and${pred.inClinicalTrial ? ` Stage ${pred.clinicalStage} clinical validation` : ' pathway'} features, demonstrating why format engineering unlocks this pair's therapeutic value.`;
+      gnnLine += `\n- **Partial Fit Interpretation & Score Rationale**: A **Partial Fit** means both targets remain bindable, but tight membrane-proximal loop geometry requires tuned linker length or Fab arm spacing (${assessment.whyNote}). The Pairwise Druggability Score of **${pred.score.toFixed(4)}** (Rank **#${pred.rank.toLocaleString()}**) reflects the combined 63 biological, single-cell, safety, and${pred.inClinicalTrial ? ` ${stageInfo.stageTitle} clinical validation` : ' pathway'} features, demonstrating why format engineering unlocks this pair's therapeutic value.`;
     } else if (assessment.verdict === 'blocked') {
       gnnLine += `\n- **Blocked Structural Interpretation**: ${assessment.whyNote} Although transcriptomic features produce a Pairwise Druggability Score of **${pred.score.toFixed(4)}**, physical dual-Fab accessibility blocks standard IgG engagement without major format redesign.`;
     }
@@ -490,16 +520,16 @@ function buildDeterministicTemplateReport(
 
   return `${formatProvenanceHeader(provenance)}
 
-### 1. Target & Clinical Context
+### 1. Target & Clinical Progression Stage Context
 - **${g1.gene}** (\`${g1.category}\`, enriched in \`${g1.cell_bias}\`): ${g1.description}.
 - **${g2.gene}** (\`${g2.category}\`, enriched in \`${g2.cell_bias}\`): ${g2.description}.
-- **Mechanism**: \`${pred.mechanismType}\`. ${clinicalSummary}
+- **Mechanism & Stage**: \`${pred.mechanismType}\`. ${clinicalSummary}
 
 ### 2. Quantitative Drivers (Pairwise Druggability & Biological Evidence)
-- **Pairwise Druggability Score & Position**: **${pred.score.toFixed(4)}**, placing **${pred.gene1} + ${pred.gene2}** at **#${pred.rank.toLocaleString()} / ${pred.totalPairs.toLocaleString()}** (top **${percentile}%**).
+- **Pairwise Druggability Score & Position**: **${pred.score.toFixed(4)}** (calibrated `[0, 1]`), placing **${pred.gene1} + ${pred.gene2}** at **#${pred.rank.toLocaleString()} / ${pred.totalPairs.toLocaleString()}** (top **${percentile}%**).
 - **Tumor-vs-Normal Safety (\`score_safe\`)**: **${(f.score_safe ?? 0).toFixed(4)}**${safeBin ? ` (${safeBin.binLabel})` : ''} from tumor-minus-normal deltas $\\Delta_x = ${(f.dx_tumor_minus_normal ?? 0).toFixed(4)}$ and $\\Delta_y = ${(f.dy_tumor_minus_normal ?? 0).toFixed(4)}$.
 - **Single-Cell Activity**: Double-positive max **${(f.double_ratio_max ?? 0).toFixed(4)}**${doubleBin ? ` (${doubleBin.binLabel})` : ''}; single-positive max **${(f.single_ratio_max ?? 0).toFixed(4)}**${singleBin ? ` (${singleBin.binLabel})` : ''}; overall Pearson correlation **$r = ${(f.pearson_overall ?? 0).toFixed(4)}$**${pearsonBin ? ` (${pearsonBin.binLabel})` : ''}.
-- **Embedding & Pathways**: Gene2Vec distance **${(f.vector_score ?? 0).toFixed(4)}**${vecBin ? ` (${vecBin.binLabel})` : ''}; shared pathways **${f.pathway_cooccur ?? 0}** (KEGG: ${f.kegg_cooccur ?? 0}, GO BP: ${f.go_cooccur ?? 0}).${gnnLine}
+- **3D-GNN Embedding & Pathways**: Structural latent distance **${(f.vector_score ?? 0).toFixed(4)}**${vecBin ? ` (${vecBin.binLabel})` : ''}; shared pathways **${f.pathway_cooccur ?? 0}** (KEGG: ${f.kegg_cooccur ?? 0}, GO BP: ${f.go_cooccur ?? 0}).${gnnLine}
 
 ### 3. Translational Risks & Next Steps
 - **Primary Consideration**: ${primaryRisk}

@@ -1,63 +1,783 @@
-drug,gene1,gene2,clinical_stage,mechanism_type,indication_notes,needs_verification
-Cadonilimab (AK104),PDCD1,CTLA4,1,tumor-immunotherapy,PD-1 x CTLA-4 approved in China for cervical and gastric cancer,false
-Amivantamab,EGFR,MET,1,TAA+TAA,EGFR x MET FDA-approved for EGFR exon 20ins NSCLC,false
-Glofitamab,MS4A1,CD3E,1,bridge-two-cells,CD20 x CD3 FDA-approved for relapsed/refractory DLBCL,false
-Teclistamab,TNFRSF17,CD3E,1,bridge-two-cells,BCMA x CD3 FDA-approved for relapsed/refractory multiple myeloma,false
-Talquetamab,GPRC5D,CD3E,1,bridge-two-cells,GPRC5D x CD3 FDA-approved for relapsed/refractory multiple myeloma,false
-Blinatumomab,CD19,CD3E,1,bridge-two-cells,CD19 x CD3 FDA-approved for B-cell ALL,false
-Tarlatamab,DLL3,CD3E,1,bridge-two-cells,DLL3 x CD3 FDA-approved for extensive-stage SCLC,false
-Ivonescimab (AK112),PDCD1,VEGFA,1,tumor-immunotherapy,PD-1 x VEGF approved in China and Phase 3 global NSCLC,true
-Tebentafusp,PMEL,CD3E,1,bridge-two-cells,gp100 x CD3 FDA-approved for uveal melanoma (TCR-CD3 fusion),true
-Mosunetuzumab,MS4A1,CD3D,1,bridge-two-cells,CD20 x CD3 FDA-approved for follicular lymphoma (mapped to CD3D variant),true
-Epcoritamab,MS4A1,CD3G,1,bridge-two-cells,CD20 x CD3 FDA-approved for DLBCL (mapped to CD3G variant),true
-Catumaxomab,EPCAM,CD3E,1,bridge-two-cells,EpCAM x CD3 historically approved in EU (later withdrawn),true
-KN046,CD274,CTLA4,2,tumor-immunotherapy,PD-L1 x CTLA-4 Phase 3 in NSCLC and PDAC,true
-Zenocutuzumab,ERBB2,ERBB3,2,TAA+TAA,HER2 x HER3 bispecific in NRG1 fusion solid tumors,false
-Zanidatamab,ERBB2,ERBB3,2,TAA+TAA,HER2 biparatopic proxy paired with HER3 dimerization partner,true
-Bintrafusp alfa (M7824),CD274,TGFBR2,2,tumor-immunotherapy,PD-L1 x TGF-beta receptor II trap,true
-Tebotelimab (MGD013),PDCD1,LAG3,2,tumor-immunotherapy,PD-1 x LAG-3 Phase 2/3 checkpoint bispecific,true
-Rilvegostomig / PD1xTIGIT,PDCD1,TIGIT,2,tumor-immunotherapy,PD-1 x TIGIT Phase 2/3 NSCLC combination bispecific,true
-Odronextamab,MS4A1,CD3E,2,bridge-two-cells,CD20 x CD3 (pair stage governed by Glofitamab stage 1),true
-Petosemtamab (MCLA-158),EGFR,LGR5,3,TAA+TAA,EGFR x LGR5 Phase 2/3 HNSCC bispecific,false
-Sabatolimab-bispecific proxy,PDCD1,HAVCR2,3,tumor-immunotherapy,PD-1 x TIM-3 bispecific checkpoint blockade,true
-Navicixizumab,DLL4,VEGFA,3,TAA+TAA,DLL4 x VEGF anti-angiogenic bispecific,true
-FS118,CD274,LAG3,3,tumor-immunotherapy,PD-L1 x LAG-3 Phase 1/2 bispecific,true
-IBI318,PDCD1,CD274,3,tumor-immunotherapy,PD-1 x PD-L1 cis/trans dual checkpoint bispecific,true
-Acasunlimab (GEN1046),CD274,TNFRSF9,3,tumor-immunotherapy,PD-L1 x 4-1BB conditional T cell costimulator,false
-Cibisatamab,CEACAM5,CD3E,3,bridge-two-cells,CEA x CD3 T cell engager in colorectal/GI tumors,false
-Pasotuxizumab,FOLH1,CD3E,3,bridge-two-cells,PSMA x CD3 T cell engager in mCRPC,true
-Ubamatamab,MUC16,CD3E,3,bridge-two-cells,MUC16 x CD3 bispecific in ovarian cancer,true
-IMM0306,CD47,MS4A1,3,bridge-two-cells,CD47 x CD20 innate-adaptive bispecific,true
-NI-1701,CD47,CD19,3,bridge-two-cells,CD47 x CD19 bispecific,true
-IBI322,CD47,CD274,3,tumor-immunotherapy,CD47 x PD-L1 macrophage-T cell dual checkpoint,true
-HLX301,TIGIT,CD274,3,tumor-immunotherapy,TIGIT x PD-L1 bispecific,true
-BL-B01D1,EGFR,ERBB3,3,TAA+TAA,EGFR x HER3 bispecific antibody-drug conjugate,false
-PM8002,CD274,VEGFA,3,tumor-immunotherapy,PD-L1 x VEGF bispecific in NSCLC and SCLC,false
-CLDN18xCD3 (AMG 910),CLDN18,CD3E,3,bridge-two-cells,Claudin-18.2 x CD3 T cell engager,true
-GPC3xCD3 (ERY974),GPC3,CD3E,3,bridge-two-cells,Glypican-3 x CD3 T cell engager in HCC,true
-CD38xCD3,CD38,CD3E,3,bridge-two-cells,CD38 x CD3 T cell engager in myeloma,true
-CD33xCD3 (AMG 330),CD33,CD3E,3,bridge-two-cells,CD33 x CD3 T cell engager in AML,true
-MUC1xCD3,MUC1,CD3E,4,bridge-two-cells,MUC1 x CD3 preclinical solid-tumor engager,true
-TACSTD2xCD3,TACSTD2,CD3E,4,bridge-two-cells,TROP-2 x CD3 preclinical solid-tumor engager,true
-FAPxCD40 (RO7300490),FAP,CD40,4,bridge-two-cells,FAP x CD40 stroma-targeted myeloid agonist,true
-CD70xCD3,CD70,CD3E,4,bridge-two-cells,CD70 x CD3 preclinical/IND T cell engager,true
-AXLxMET,AXL,MET,4,TAA+TAA,AXL x MET dual receptor tyrosine kinase preclinical pair,true
-CEACAM5xCD47,CEACAM5,CD47,4,tumor-immunotherapy,CEA x CD47 tumor-targeted phagocytosis pair,true
-EGFRxCD47,EGFR,CD47,4,tumor-immunotherapy,EGFR x CD47 preclinical innate checkpoint pair,true
-MSLNxCD40,MSLN,CD40,4,bridge-two-cells,Mesothelin x CD40 preclinical APC engager,true
-CD276xCD3,CD276,CD3E,4,bridge-two-cells,B7-H3 x CD3 solid tumor T cell engager,true
-FOLR1xCD3,FOLR1,CD3E,4,bridge-two-cells,Folate receptor alpha x CD3 engager,true
-NECTIN4xCD3,NECTIN4,CD3E,4,bridge-two-cells,Nectin-4 x CD3 engager,true
-CTLA4xLAG3,CTLA4,LAG3,4,tumor-immunotherapy,CTLA-4 x LAG-3 preclinical dual checkpoint,true
-PDCD1xCCR8,PDCD1,CCR8,4,tumor-immunotherapy,PD-1 x CCR8 Treg-depleting checkpoint pair,true
-CD274xCD276,CD274,CD276,4,tumor-immunotherapy,PD-L1 x B7-H3 preclinical dual checkpoint,true
-Ertumaxomab,ERBB2,CD3E,5,bridge-two-cells,HER2 x CD3 discontinued clinical program,true
-Duligotuzumab,EGFR,ERBB3,5,TAA+TAA,EGFR x HER3 discontinued (superseded by BL-B01D1 ADC; verify stage coding),true
-Vanucizumab,VEGFA,ANGPT2,5,TAA+TAA,VEGF x ANG2 discontinued oncology program,true
-Istiratumab (MM-141),IGF1R,ERBB3,5,TAA+TAA,IGF-1R x HER3 discontinued in pancreatic cancer,true
-Pritumumab/Discontinued_ITGAV_KDR,ITGAV,KDR,5,TAA+TAA,Integrin alpha-V x VEGFR2 stalled/discontinued pair proxy,true
-Discontinued_CD44_PROM1,CD44,PROM1,5,TAA+TAA,CD44 x CD133 stalled stem-cell target pair proxy,true
-Discontinued_CXCR4_CCR5,CXCR4,CCR5,5,tumor-immunotherapy,CXCR4 x CCR5 discontinued chemokine pair proxy,true
-Discontinued_IL6R_TNFRSF1A,IL6R,TNFRSF1A,5,TAA+TAA,IL-6R x TNFR1 discontinued inflammatory proxy,true
-Discontinued_CSF1R_CCR2,CSF1R,CCR2,5,tumor-immunotherapy,CSF1R x CCR2 discontinued myeloid depletion proxy,true
-Discontinued_PDGFRA_KIT,PDGFRA,KIT,5,TAA+TAA,PDGFRA x c-KIT stalled kinase bispecific proxy,true
+drug,gene1,gene2,clinical_stage,mechanism_type,needs_verification
+Elranatamab,CD3E,TNFRSF17,1,bridge-two-cells,false
+Talquetamab,CD3E,GPRC5D,1,bridge-two-cells,false
+Epcoritamab,CD3E,MS4A1,1,bridge-two-cells,false
+Glofitamab,CD3E,MS4A1,1,bridge-two-cells,false
+Teclistamab,CD3E,TNFRSF17,1,bridge-two-cells,false
+Cadonilimab,CTLA4,PDCD1,1,dual-checkpoint,false
+Mosunetuzumab,CD3E,MS4A1,1,bridge-two-cells,false
+Amivantamab-VMJM,EGFR,MET,1,TAA+TAA,false
+Blinatumomab,CD19,CD3E,1,bridge-two-cells,false
+Ivonescimab,PDCD1,VEGFA,1,TAA+TAA,false
+Odronextamab,CD3E,MS4A1,1,bridge-two-cells,false
+Tarlatamab,CD3E,DLL3,1,bridge-two-cells,false
+Catumaxomab,CD3E,EPCAM,2,bridge-two-cells,false
+Alnuctamab,CD3E,TNFRSF17,2,bridge-two-cells,false
+Erfonrilimab,CD274,CTLA4,2,dual-checkpoint,false
+Linvoseltamab,CD3E,TNFRSF17,2,bridge-two-cells,false
+Navicixizumab,DLL4,VEGFA,2,TAA+TAA,false
+Rilvegostomig,PDCD1,TIGIT,2,dual-checkpoint,false
+SI-B001,EGFR,ERBB3,2,TAA+TAA,false
+Tebotelimab,LAG3,PDCD1,2,dual-checkpoint,false
+TNB-383B,CD3E,TNFRSF17,2,bridge-two-cells,false
+Volrustomig,CTLA4,PDCD1,2,dual-checkpoint,false
+PM-8002,CD274,VEGF-A,2,TAA+TAA,false
+TR-009,DLL4,VEGF-A,2,TAA+TAA,false
+Acasunlimab,CD274,TNFRSF9,3,bridge-two-cells,false
+Acimtamig,CD16A,CD30,3,TAA+TAA,false
+AMG-570,BAFF,ICOSLG,3,TAA+TAA,false
+Anti-CD3 and anti-HER2 BiTE-expressing T cell(University of Michigan College of Engineering),CD3E,ERBB2,3,bridge-two-cells,false
+Anti-CD3/anti-EGFR -activated T cells(Barbara Ann Karmanos Cancer Institute),CD3E,EGFR,3,bridge-two-cells,false
+Bafisontamab,EGFR,MET,3,TAA+TAA,false
+BI-764532,CD3E,DLL3,3,bridge-two-cells,false
+Cevostamab,CD3E,FCRL5,3,bridge-two-cells,false
+Cinrebafusp alfa,ERBB2,TNFRSF9,3,bridge-two-cells,false
+CKD-702,EGFR,MET,3,TAA+TAA,false
+Dalutrafusp alfa,CD73,TGF-Β,3,TAA+TAA,false
+Danvilostomig,CTLA4,PDCD1,3,dual-checkpoint,false
+Dilpacimab,DLL4,VEGF-A,3,TAA+TAA,false
+Flotetuzumab,CD123,CD3E,3,bridge-two-cells,false
+FS-118,CD274,LAG3,3,dual-checkpoint,false
+GEN-1044,5T4,CD3E,3,bridge-two-cells,false
+HB-0025,CD274,VEGFA,3,TAA+TAA,false
+HLX-301,CD274,TIGIT,3,dual-checkpoint,false
+HLX-35,EGFR,TNFRSF9,3,bridge-two-cells,false
+HX-009,CD47,PDCD1,3,dual-checkpoint,false
+IMM-2505,CD274,CD47,3,dual-checkpoint,false
+Izuralimab,ICOS,PDCD1,3,bridge-two-cells,false
+JMT-601,MS4A1,SIRPΑ,3,TAA+TAA,false
+Lomvastomig,PDCD1,TIM3,3,TAA+TAA,false
+Lorigerlimab,CTLA4,PDCD1,3,dual-checkpoint,false
+M-701,CD3E,EPCAM,3,bridge-two-cells,false
+Nivatrotamab,CD3E,GD2,3,bridge-two-cells,false
+PD-L1/CTLA4 bispecific monoclonal antibody(Changhai Hospital of Shanghai),CD274,CTLA4,3,dual-checkpoint,false
+PM 1032,CLDN18.2,TNFRSF9,3,bridge-two-cells,false
+PM-1022,CD274,TIGIT,3,dual-checkpoint,false
+QL-301,CD274,TNFRSF9,3,bridge-two-cells,false
+QLF-31907,CD274,TNFRSF9,3,bridge-two-cells,false
+Recombinant anti-human CD47/PD-L1 bispecific antibody,CD274,CD47,3,dual-checkpoint,false
+Recombinant humanized anti-CD47/PD-L1 bispecific antibody(Mabwell (Shanghai) Bioscience),CD274,CD47,3,dual-checkpoint,false
+SAR-440234,CD123,CD3E,3,bridge-two-cells,false
+"TF 2-targeted cancer therapy(Immunomedics, Inc.)",CEACAM5,HISTAMINE SUCCINYL GLYCINE,3,TAA+TAA,false
+Tombestomig,LAG3,PDCD1,3,dual-checkpoint,false
+Vanucizumab,ANG2,VEGF-A,3,TAA+TAA,false
+Vibecotamab,CD123,CD3E,3,bridge-two-cells,false
+Vudalimab,CTLA4,PDCD1,3,dual-checkpoint,false
+Xentuzumab,IGF-1,IGF-2,3,TAA+TAA,false
+Zenocutuzumab,ERBB2,ERBB3,3,TAA+TAA,false
+ABL-105,ERBB2,TNFRSF9,3,bridge-two-cells,false
+AFM-24,CD16A,EGFR,3,TAA+TAA,false
+ALG.APV-527,5T4,TNFRSF9,3,bridge-two-cells,false
+anti-CD30 Bispecific Antibody-armed anti-CD3-Activated Autologous T-cells(Medical College of Wisconsin),CD30,CD3E,3,bridge-two-cells,false
+AP-203,CD274,TNFRSF9,3,bridge-two-cells,false
+Bavunalimab,CTLA4,LAG3,3,dual-checkpoint,false
+BCA-101,EGFR,TGF-Β,3,TAA+TAA,false
+BI-836880,ANG2,VEGFA,3,TAA+TAA,false
+BMS-986442,CD96,TIGIT,3,TAA+TAA,false
+BNT-142,CD3E,CLDN6,3,bridge-two-cells,false
+BPB-101,CD274,TGF-Β,3,TAA+TAA,false
+Cibisatamab,CD3E,CEA,3,bridge-two-cells,false
+CM 355,CD3E,MS4A1,3,bridge-two-cells,false
+CM-336,CD3E,TNFRSF17,3,bridge-two-cells,false
+CM-350,CD3E,GPC3,3,bridge-two-cells,false
+CN-201,CD19,CD3E,3,bridge-two-cells,false
+CN-202,CD274,TGF-Β,3,TAA+TAA,false
+DuoBody-EpCAMx4-1BB,EPCAM,TNFRSF9,3,bridge-two-cells,false
+EMB-02,LAG3,PDCD1,3,dual-checkpoint,false
+EMB-06,CD3E,TNFRSF17,3,bridge-two-cells,false
+EX-103,CD3E,MS4A1,3,bridge-two-cells,false
+Fidasimtamab,ERBB2,PDCD1,3,TAA+TAA,false
+Forimtamig,CD3E,GPRC5D,3,bridge-two-cells,false
+GB-261,CD3E,MS4A1,3,bridge-two-cells,false
+GEN-1042,CD40L,TNFRSF9,3,bridge-two-cells,false
+GEN-1047,B7-H4,CD3E,3,bridge-two-cells,false
+GEN-3017,CD30,CD3E,3,bridge-two-cells,false
+GNR-084,CD19,CD3E,3,bridge-two-cells,false
+HB-0028,CD274,TGF-Β,3,TAA+TAA,false
+HB-0036,CD274,TIGIT,3,dual-checkpoint,false
+HBM7022,CD3E,CLDN18.2,3,bridge-two-cells,false
+IBI-334,CD276,EGFR,3,TAA+TAA,false
+IMM-0306,CD47,MS4A1,3,TAA+TAA,false
+Imvotamab,CD3E,MS4A1,3,bridge-two-cells,false
+ISB-1442,CD38,CD47,3,TAA+TAA,false
+JS-201,PDCD1,TGF-Β,3,TAA+TAA,false
+JS-203,CD3E,MS4A1,3,bridge-two-cells,false
+JS-207,PDCD1,VEGFA,3,TAA+TAA,false
+JSKN-033,CD274,ERBB2,3,TAA+TAA,false
+KN-052,CD274,TNFRSF4,3,bridge-two-cells,false
+LAVA-051,CD1D,TCRDV2,3,TAA+TAA,false
+LAVA-1207,PSMA,TCRDV2,3,TAA+TAA,false
+LB101 (Centessa Pharmaceuticals ),CD274,CD47,3,dual-checkpoint,false
+LBL-015,PDCD1,TGF-Β,3,TAA+TAA,false
+LBL-024,CD274,TNFRSF9,3,bridge-two-cells,false
+LBL-033,CD3E,MUC16,3,bridge-two-cells,false
+LBL-034,CD3E,GPRC5D,3,bridge-two-cells,false
+LM-24C5,CEACAM5,TNFRSF9,3,bridge-two-cells,false
+MBS-303,CD3E,MS4A1,3,bridge-two-cells,false
+MCLA-129,EGFR,MET,3,TAA+TAA,false
+NGM-707,LILRB1,LILRB2,3,TAA+TAA,false
+Petosemtamab,EGFR,LGR5,3,TAA+TAA,false
+PM-1003,CD274,TNFRSF9,3,bridge-two-cells,false
+PRS-344,CD274,TNFRSF9,3,bridge-two-cells,false
+PT886,CD47,CLDN18.2,3,TAA+TAA,false
+Q-1802,CD274,CLDN18.2,3,TAA+TAA,false
+QLS-31905,CD3E,CLDN18,3,bridge-two-cells,false
+Recombinant anti-PD-L1/TGF-β bispecific antibody,CD274,TGF-Β,3,TAA+TAA,false
+REGN-5459,CD3E,TNFRSF17,3,bridge-two-cells,false
+REGN-5668,CD28,MUC16,3,bridge-two-cells,false
+REGN-5678,CD28,PSMA,3,bridge-two-cells,false
+REGN-7075,CD28,EGFR,3,bridge-two-cells,false
+REGN4336,CD3E,PSMA,3,bridge-two-cells,false
+RG7826,FAP,TNFRSF9,3,bridge-two-cells,false
+Sabestomig,PDCD1,TIM3,3,TAA+TAA,false
+SAL-008,CTLA4,IL-15RΑ,3,TAA+TAA,false
+SMET-12,CD3E,EGFR,3,bridge-two-cells,false
+TNB-486,CD19,CD3E,3,bridge-two-cells,false
+TQB-2868,PDCD1,TGF-Β,3,TAA+TAA,false
+Ubamatamab,CD3E,MUC16,3,bridge-two-cells,false
+ZG-005,PDCD1,TIGIT,3,dual-checkpoint,false
+ZGGS18,TGF-Β,VEGFA,3,TAA+TAA,false
+A-319,CD19,CD3E,3,bridge-two-cells,false
+A-337,CD3E,EPCAM,3,bridge-two-cells,false
+ABL-103,B7-H4,TNFRSF9,3,bridge-two-cells,false
+ABL-501,CD274,LAG3,3,dual-checkpoint,false
+ABL-503,CD274,TNFRSF9,3,bridge-two-cells,false
+Acapatamab,CD3E,PSMA,3,bridge-two-cells,false
+AFM-28,CD123,CD16A,3,TAA+TAA,false
+AK-129,LAG3,PDCD1,3,dual-checkpoint,false
+AK-130,TGF-Β,TIGIT,3,TAA+TAA,false
+AK-131,CD73,PDCD1,3,TAA+TAA,false
+AK-132,CD47,CLDN18.2,3,TAA+TAA,false
+AMG-199,CD3E,MUC17,3,bridge-two-cells,false
+AMG-340,CD3E,PSMA,3,bridge-two-cells,false
+AMG-562,CD19,CD3E,3,bridge-two-cells,false
+AMG-794,CD3E,CLDN6,3,bridge-two-cells,false
+Anti-CD33/anti-FcgammaRI bispecific antibody(University of California San Diego),CD33,CD64,3,TAA+TAA,false
+Anti-EGFR-bispecific antibody armed activated T-cell therapy(Memorial Sloan-Kettering Cancer Center),CD3E,EGFR,3,bridge-two-cells,false
+APVO436,CD123,CD3E,3,bridge-two-cells,false
+ARB-202,CD3E,CDH17,3,bridge-two-cells,false
+ASP-2074,CD3E,TSPAN8,3,bridge-two-cells,false
+ASP2138,CD3E,CLDN18.2,3,bridge-two-cells,false
+ATG-101,CD274,TNFRSF9,3,bridge-two-cells,false
+B-901,CD274,CD40,3,TAA+TAA,false
+B1962,CD274,VEGFA,3,TAA+TAA,false
+BA-1201,CD274,TGF-Β,3,TAA+TAA,false
+BA-1202,CD3E,CEA,3,bridge-two-cells,false
+BA-3182,CD3E,EPCAM,3,bridge-two-cells,false
+BAT-7104,CD274,CD47,3,dual-checkpoint,false
+BC-007 (Dragon Boat Biopharmaceutical),CD47,CLDN18.2,3,TAA+TAA,false
+BC-3448,CD3E,EGFR,3,bridge-two-cells,false
+BC008-1A,PDCD1,TIGIT,3,dual-checkpoint,false
+BGB-B167,CEACAM5,TNFRSF9,3,bridge-two-cells,false
+BH-3120,CD274,TNFRSF9,3,bridge-two-cells,false
+BI-765049,CD3E,NCR3LG1,3,bridge-two-cells,false
+BI-765179,FAP,TNFRSF9,3,bridge-two-cells,false
+BI-905711,CDH17,DR5,3,TAA+TAA,false
+BJ-005,CD274,TGF-Β,3,TAA+TAA,false
+BS-001,CD3E,MET,3,bridge-two-cells,false
+BSI-585,LILRB2,PDCD1,3,TAA+TAA,false
+CC-1,CD3E,PSMA,3,bridge-two-cells,false
+CC-3,CD276,CD3E,3,bridge-two-cells,false
+CCW-702,CD3E,PSMA,3,bridge-two-cells,false
+CLN-049,CD3E,FLT3,3,bridge-two-cells,false
+CLN-978,CD19,CD3E,3,bridge-two-cells,false
+CTX-8371,CD274,PDCD1,3,dual-checkpoint,false
+CX-904,CD3E,EGFR,3,bridge-two-cells,false
+D3L-001,CD47,ERBB2,3,TAA+TAA,false
+Duvortuxizumab,CD19,CD3E,3,bridge-two-cells,false
+Eciskafusp alfa(Roche),IL-2R,PDCD1,3,TAA+TAA,false
+EMB-07,CD3E,ROR1,3,bridge-two-cells,false
+ERY-974,CD3E,GPC3,3,bridge-two-cells,false
+ES-014,CD39,TGF-Β,3,TAA+TAA,false
+ES-101,CD274,TNFRSF9,3,bridge-two-cells,false
+EX-101,CD3E,ERBB2,3,bridge-two-cells,false
+F-182112,CD3E,TNFRSF17,3,bridge-two-cells,false
+FS-120,TNFRSF4,TNFRSF9,3,TAA+TAA,false
+FS-222,CD274,TNFRSF9,3,bridge-two-cells,false
+GBR-1342,CD38,CD3E,3,bridge-two-cells,false
+GEM3-PSCA,CD3E,PSCA,3,bridge-two-cells,false
+Givastomig,CLDN18.2,TNFRSF9,3,bridge-two-cells,false
+GMA-106,GIPR,GLP-1R,3,TAA+TAA,false
+GR-1803,CD3E,TNFRSF17,3,bridge-two-cells,false
+GR-1901,CD123,CD3E,3,bridge-two-cells,false
+GT-90008,CD274,TGF-Β,3,TAA+TAA,false
+HBM-7008,B7-H4,TNFRSF9,3,bridge-two-cells,false
+HK010,CD274,TNFRSF9,3,bridge-two-cells,false
+HuCD33 BsAb (Y-mAbs Therapeutics),CD33,CD3E,3,bridge-two-cells,false
+IBI-321,PDCD1,TIGIT,3,dual-checkpoint,false
+IBI-323,CD274,LAG3,3,dual-checkpoint,false
+IBI-389,CD3E,CLDN18.2,3,bridge-two-cells,false
+IBI319,PDCD1,TNFRSF9,3,bridge-two-cells,false
+IGM-2644,CD38,CD3E,3,bridge-two-cells,false
+IMA-401,MAGEA4,MAGEA8,3,TAA+TAA,false
+IMB071703,CD40,TNFRSF9,3,bridge-two-cells,false
+IMGS-001,CD274,PDL2,3,TAA+TAA,false
+IMM-2510,CD274,VEGFA,3,TAA+TAA,false
+IMM-2520,CD274,CD47,3,dual-checkpoint,false
+INCA-33890,PDCD1,TGFBR2,3,TAA+TAA,false
+INCA32459,LAG3,PDCD1,3,dual-checkpoint,false
+Inezetamab,CD40,MSLN,3,TAA+TAA,false
+JNJ-67571244,CD33,CD3E,3,bridge-two-cells,false
+JNJ-70218902,CD3E,TMEFF2,3,bridge-two-cells,false
+JNJ-75348780,CD22,CD3E,3,bridge-two-cells,false
+JNJ-78278343,CD3E,KLK2,3,bridge-two-cells,false
+JNJ-78306358,CD3E,HLA-G,3,bridge-two-cells,false
+JNJ-87189401,CD28,PSMA,3,bridge-two-cells,false
+K193 bispecific antibody,CD19,CD3Ε,3,TAA+TAA,false
+LB-4330,CD8,CLDN18.2,3,TAA+TAA,false
+LNF1904,CD19,CD3E,3,bridge-two-cells,false
+LOR-S03,CD27,CD274,3,TAA+TAA,false
+LY-3415244,CD274,TIM3,3,TAA+TAA,false
+M-802,CD3E,ERBB2,3,bridge-two-cells,false
+MCLA-145,CD274,TNFRSF9,3,bridge-two-cells,false
+MGD-007,CD3E,GPA33,3,bridge-two-cells,false
+MGD-024,CD123,CD3E,3,bridge-two-cells,false
+NBL-015,CLDN18.2,TNFRSF9,3,bridge-two-cells,false
+NBL-028,CLDN6,TNFRSF9,3,bridge-two-cells,false
+NG-641,CD3E,FAP,3,bridge-two-cells,false
+NI-1801,CD47,MSLN,3,TAA+TAA,false
+NVG-111,CD3E,ROR1,3,bridge-two-cells,false
+oHSV2-BsAb,CD274,CD3E,3,bridge-two-cells,false
+ONO-4685,CD3E,PDCD1,3,bridge-two-cells,false
+Orlotamab,CD276,CD3E,3,bridge-two-cells,false
+PF-07062119,CD3E,GC-C,3,bridge-two-cells,false
+PF-07257876,CD274,CD47,3,dual-checkpoint,false
+Plamotamab,CD3E,MS4A1,3,bridge-two-cells,false
+PM-1009,CD112R,TIGIT,3,TAA+TAA,false
+PM-1080,EGFR,MET,3,TAA+TAA,false
+PM-8001,CD274,TGF-Β,3,TAA+TAA,false
+PT217,CD47,DLL3,3,TAA+TAA,false
+Q-1801,CD274,SIRPΑ,3,TAA+TAA,false
+QL-325,CD3E,CLL-1,3,bridge-two-cells,false
+QL-335,CD3E,LY6G6D,3,bridge-two-cells,false
+QL401,CD274,CD47,3,dual-checkpoint,false
+QLP-31907,CD37,MS4A1,3,TAA+TAA,false
+QLS31904,CD3E,DLL3,3,bridge-two-cells,false
+RC-148,PDCD1,VEGFA,3,TAA+TAA,false
+Recombinant anti-HER2/CD3 humanized bispecific antibody(Sichuan Luzhou Buchang Pharmaceuticals),CD3E,ERBB2,3,bridge-two-cells,false
+Recombinant humanized anti-BCMA/CD3 bispecific antibody(Shandong New Time Pharmaceutical Co. Ltd.),CD3E,TNFRSF17,3,bridge-two-cells,false
+Recombinant PD-1/TIM3 bispecific antibody(L&L vision biopharmaceuticals),PDCD1,TIM3,3,TAA+TAA,false
+REGN-5837,CD22,CD28,3,bridge-two-cells,false
+REMD-532,PDCD1,TIGIT,3,dual-checkpoint,false
+Reozalimab,CD274,PDCD1,3,dual-checkpoint,false
+RG-6333,CD19,CD28,3,bridge-two-cells,false
+RG6129,CD3E,MAGEA4,3,bridge-two-cells,false
+RO-7293583,CD3E,TYRP1,3,bridge-two-cells,false
+RO-7297089,CD16A,TNFRSF17,3,TAA+TAA,false
+RO-7300490,CD40L,FAP,3,TAA+TAA,false
+Runimotamab,CD3E,ERBB2,3,bridge-two-cells,false
+SG12473,CD274,CD47,3,dual-checkpoint,false
+SG1408,CD274,VEGFA,3,TAA+TAA,false
+SG1906,CD47,CLDN18.2,3,TAA+TAA,false
+SG2501,CD38,CD47,3,TAA+TAA,false
+SGN-BB228,CD228,TNFRSF9,3,bridge-two-cells,false
+SH-009,CD274,CD47,3,dual-checkpoint,false
+SH006,CD274,TIGIT,3,dual-checkpoint,false
+SHR-2002,CD112R,TIGIT,3,TAA+TAA,false
+SHR-7367,CD40,FAP,3,TAA+TAA,false
+SIM0348,CD112R,TIGIT,3,TAA+TAA,false
+SKB-337,CD274,CTLA4,3,dual-checkpoint,false
+SSGJ-705,ERBB2,PDCD1,3,TAA+TAA,false
+SSGJ-707,PDCD1,VEGFA,3,TAA+TAA,false
+TG-1801,CD19,CD47,3,TAA+TAA,false
+TQB-2825,CD3E,MS4A1,3,bridge-two-cells,false
+TQB2934,CD3E,TNFRSF17,3,bridge-two-cells,false
+TST-005,CD274,TGF-Β,3,TAA+TAA,false
+WVT-078,CD3E,TNFRSF17,3,bridge-two-cells,false
+Xaluritamig,CD3E,STEAP1,3,bridge-two-cells,false
+XmAb-808,CD276,CD28,3,bridge-two-cells,false
+XmAb-819,CD3E,ENPP3,3,bridge-two-cells,false
+XmAb968,CD38,CD3E,3,bridge-two-cells,false
+Y-150,CD38,CD3E,3,bridge-two-cells,false
+Y332,TGF-Β,VEGFA,3,TAA+TAA,false
+YH-008,CD40,PDCD1,3,TAA+TAA,false
+YK012,CD19,CD3E,3,bridge-two-cells,false
+ZGGS15,LAG3,TIGIT,3,dual-checkpoint,false
+Papiliximab,CD274,CD47,3,dual-checkpoint,false
+GEM-333,CD33,CD3E,3,bridge-two-cells,false
+Nisevokitug,TGF-Β1,TGF-Β2,3,TAA+TAA,false
+Obertamig,CD3Ε,HLA-G,3,TAA+TAA,false
+Tobemstomig,LAG3,PDCD1,3,dual-checkpoint,false
+vonsetamig,CD3Ε,TNFRSF17,3,TAA+TAA,false
+Zeripatamig,CD19,CD47,3,TAA+TAA,false
+CDR-404,HLA,MAGEA4,4,TAA+TAA,false
+EX-105,CD276,CD3E,4,bridge-two-cells,false
+HBM-9027,CD274,CD40,4,TAA+TAA,false
+R7020,CD3E,TNFRSF17,4,bridge-two-cells,false
+VEGF/ANG2 Tetravalent Bispecific Antibody,ANG2,VEGFA,4,TAA+TAA,false
+705,ERBB2,PDCD1,4,TAA+TAA,false
+A-329,CD19,CD3E,4,bridge-two-cells,false
+ABP-100,CD3E,ERBB2,4,bridge-two-cells,false
+ADG152,CD3E,MS4A1,4,bridge-two-cells,false
+CMD007,CD3E,MSLN,4,bridge-two-cells,false
+CTIM-76,CD3E,CLDN6,4,bridge-two-cells,false
+DR30318,CD3E,CLDN18.2,4,bridge-two-cells,false
+JY-016,CD3E,EGFR,4,bridge-two-cells,false
+LP-003,CD3E,GD2,4,bridge-two-cells,false
+LP-104,CD3E,CD47,4,bridge-two-cells,false
+SHS-010,CTLA4,PDCD1,4,dual-checkpoint,false
+SPX-303,CD274,LILRB2,4,TAA+TAA,false
+1D8N/CEGa1,EGFR,TNFRSF9,4,bridge-two-cells,false
+ABL-102,ROR1,TNFRSF9,4,bridge-two-cells,false
+ABL-104,EGFR,TNFRSF9,4,bridge-two-cells,false
+ABL-506,CD274,CD276,4,TAA+TAA,false
+ABL-602,CD3E,CLL-1,4,bridge-two-cells,false
+ABP-102(Abpro),CD3E,ERBB2,4,bridge-two-cells,false
+ABP-110,CD3E,GPC3,4,bridge-two-cells,false
+ABP-130,CD3E,CEA,4,bridge-two-cells,false
+ABP-150 (Abpro),CD3E,CLDN18.2,4,bridge-two-cells,false
+ABP-200,ANG2,VEGF-A,4,TAA+TAA,false
+ADG138,CD3E,ERBB2,4,bridge-two-cells,false
+AI-027,CD24,PDCD1,4,TAA+TAA,false
+AJUD003,CD3E,MS4A1,4,bridge-two-cells,false
+ALK-1/VEGF bispecific antibody,ALK1,VEGFA,4,TAA+TAA,false
+alpha-c-Met/EGFR-0286 bispecific antibody drug conjugate(Sorrento Therapeutics),EGFR,MET,4,TAA+TAA,false
+AM-105,EGFR,TNFRSF9,4,bridge-two-cells,false
+Anti-CD47/EPCAM bispecific antibody (Virtuoso Therapeutics),CD47,EPCAM,4,TAA+TAA,false
+Anti-CD47/ICAM-1 bispecific antibody (Virtuoso Therapeutics),CD47,ICAM-1,4,TAA+TAA,false
+Anti-Chi3l1/PD-1 bi-specific mAb (Ocean Biomedical),CHI3L1,PDCD1,4,TAA+TAA,false
+Anti-GPRC5D/CD3 Bispecific T-Cell-Redirecting Antibody,CD3E,GPRC5D,4,bridge-two-cells,false
+Anti-HER2/TROP2 bispecific antibody(Baikai Biopharmaceutical),ERBB2,TROP-2,4,TAA+TAA,false
+Anti-PD-L1/CD40 bispecific antibody (Harbour BioMed),CD274,CD40,4,TAA+TAA,false
+Anti-PD1 x CD40(Biotheus),CD40,PDCD1,4,TAA+TAA,false
+Anti-PD1 x EGFR BsAb,EGFR,PDCD1,4,TAA+TAA,false
+APVO-425,CD3E,ROR1,4,bridge-two-cells,false
+APVO-437,CD123,CD3E,4,bridge-two-cells,false
+APVO-442,CD3E,PSMA,4,bridge-two-cells,false
+APVO711,CD274,CD40,4,TAA+TAA,false
+ARB-201,CD3E,CDH17,4,bridge-two-cells,false
+ATOR-4066,CD40,CEA,4,TAA+TAA,false
+B-193,CD19,CD3E,4,bridge-two-cells,false
+B-902,CD274,TIGIT,4,dual-checkpoint,false
+BA-3142,CD276,CD3E,4,bridge-two-cells,false
+BA-3311,CD3E,EGFR,4,bridge-two-cells,false
+BC005 (Shandong Buchang Pharmaceuticals),CD3E,GPC3,4,bridge-two-cells,false
+BC261,CD3E,STEAP1,4,bridge-two-cells,false
+BCD-105,CD3E,MS4A1,4,bridge-two-cells,false
+BCD-106,CD274,CD47,4,dual-checkpoint,false
+BCG-011,EGFR,TROP-2,4,TAA+TAA,false
+BCG-012,ERBB3,MUC1,4,TAA+TAA,false
+BCG-033,PTK7,TROP-2,4,TAA+TAA,false
+BCMA x CD16 Dual Engagers(Oncopeptides),CD16A,TNFRSF17,4,TAA+TAA,false
+BCMA-TACI dual-specific T cell engager (Hummingbird Bioscience),TACI,TNFRSF17,4,TAA+TAA,false
+BD-9,IL-13,TSLP,4,TAA+TAA,false
+BH-1657,IL-17A,TNF-Α,4,TAA+TAA,false
+BH2922,EGFR,PDCD1,4,TAA+TAA,false
+BH2941,CD274,PDCD1,4,dual-checkpoint,false
+BI-836901,ANG2,DLL4,4,TAA+TAA,false
+BiCKI-IL-7,IL-7,PDCD1,4,TAA+TAA,false
+BMX-101,CD274,CD38,4,TAA+TAA,false
+BSI-725,CLDN18.2,TROP-2,4,TAA+TAA,false
+BV28-OKT3,CD3E,CD79B,4,bridge-two-cells,false
+CB-213,LAG3,PDCD1,4,dual-checkpoint,false
+CD117xCD3 BiTE(Harbour BioMed),C-KIT,CD3E,4,bridge-two-cells,false
+CD19 HLE BiTE,CD19,CD3E,4,bridge-two-cells,false
+"CD3XCD20 bsAb(Protheragen, Inc.)",CD3E,MS4A1,4,bridge-two-cells,false
+CD3xMOSPD2 BiTE,CD3E,MOSPD2,4,bridge-two-cells,false
+CDX-622,C-KIT,TSLP,4,TAA+TAA,false
+CI-107,CD3E,EGFR,4,bridge-two-cells,false
+CIT-801,IL15R,PDCD1,4,TAA+TAA,false
+CLDN18.2 x CD3,CD3E,CLDN18.2,4,bridge-two-cells,false
+CLDN6xCD3 Bispecific Antibody (Context Therapeutics LLC),CD3E,CLDN6,4,bridge-two-cells,false
+CM-109,CD3E,MUC17,4,bridge-two-cells,false
+CM-110,CD3E,DLL3,4,bridge-two-cells,false
+COVA4231,CD33,CD3E,4,bridge-two-cells,false
+DB-001(DotBio Pte),CD274,HER2 EXON 20,4,TAA+TAA,false
+DB-002,CD274,CTLA4,4,dual-checkpoint,false
+DM-004,5T4,MET,4,TAA+TAA,false
+DM-005,EGFR,MET,4,TAA+TAA,false
+DM-926,LILRB1,LILRB2,4,TAA+TAA,false
+DM001,EGFR,TROP-2,4,TAA+TAA,false
+DM002,LILRB1,LILRB2,4,TAA+TAA,false
+DR50102,CD3E,CEA,4,bridge-two-cells,false
+EGFR-CD3 Pb-TCB,CD3E,EGFR,4,bridge-two-cells,false
+EGFR-XPAT,CD3E,EGFR,4,bridge-two-cells,false
+EK193,CD19,CD3E,4,bridge-two-cells,false
+EM801,CD3E,TNFRSF17,4,bridge-two-cells,false
+EPB-002,CD3E,NECTIN-4,4,bridge-two-cells,false
+ES-019,CD274,SIRPΑ,4,TAA+TAA,false
+ES-028,CLDN18.2,SIRPΑ,4,TAA+TAA,false
+ESK1-BiTE,CD3E,WT1,4,bridge-two-cells,false
+EU-501,ERBB2,TNFRSF9,4,bridge-two-cells,false
+EU-505,PDCD1,TNFRSF9,4,bridge-two-cells,false
+EVOLVE-105,CD3E,MS4A1,4,bridge-two-cells,false
+EX-106,CD3E,GPC3,4,bridge-two-cells,false
+EX-108,CD3E,TROP-2,4,bridge-two-cells,false
+F7AK3,CD3E,TROP-2,4,bridge-two-cells,false
+FL-302,CLDN18.2,TNFRSF9,4,bridge-two-cells,false
+GB-262,CD274,DAF,4,TAA+TAA,false
+GB-264,CD3E,CLDN18.2,4,bridge-two-cells,false
+GB-7015,CD19,CD22,4,TAA+TAA,false
+GB265,CD274,TIGIT,4,dual-checkpoint,false
+GMA-202,CD3E,ETA,4,bridge-two-cells,false
+GS18,TGF-Β,VEGFA,4,TAA+TAA,false
+H2-scDb,CD3E,P53 R175H,4,bridge-two-cells,false
+HBM-1040,IL-2RΒ,IL-2RΓ,4,TAA+TAA,false
+HBM-7004,B7-H4,CD3E,4,bridge-two-cells,false
+HBM-7021,MSLN,TNFRSF9,4,bridge-two-cells,false
+HBM-7023,5T4,CD40,4,TAA+TAA,false
+HBM-7024,CD274,CD28,4,bridge-two-cells,false
+HBM-7025,NCR3,ROR1,4,TAA+TAA,false
+HER2-PDL1,CD274,ERBB2,4,TAA+TAA,false
+HER2/CD3 targeted antibody(BioAtla),CD3E,ERBB2,4,bridge-two-cells,false
+HK-013,MSLN,TNFRSF9,4,bridge-two-cells,false
+HK056-001,4-1BBL,CD276,4,TAA+TAA,false
+HLX-309,NECTIN-4,TNFRSF9,4,bridge-two-cells,false
+HMBD-004A,CD33,CD47,4,TAA+TAA,false
+HSB-3215,ERBB2,ERBB3,4,TAA+TAA,false
+HX-013,IL-10R,PDCD1,4,TAA+TAA,false
+HX-016,KDR,PDCD1,4,TAA+TAA,false
+IBI-327,CD274,TNFRSF4,4,bridge-two-cells,false
+IGM-2537,CD123,CD3E,4,bridge-two-cells,false
+IM-171,CD3E,CLDN6,4,bridge-two-cells,false
+IM-1920,CD19,MS4A1,4,TAA+TAA,false
+IMGS-501,CD274,PDL2,4,TAA+TAA,false
+IMM-0207,CD47,VEGF-A,4,TAA+TAA,false
+IMM-26011,CD47,FLT3,4,TAA+TAA,false
+IMM-5601,CD38,CD47,4,TAA+TAA,false
+IMM0403,EGFR,VEGFA,4,TAA+TAA,false
+INBRX-130,5T4,CD3E,4,bridge-two-cells,false
+INV-1013,CTLA4,IL2RA,4,TAA+TAA,false
+INV-321,CTLA4,IL2RA,4,TAA+TAA,false
+INV-322,CTLA4,IL2RA,4,TAA+TAA,false
+INV-721,CD276,GD2,4,TAA+TAA,false
+INV-724,CD276,GD2,4,TAA+TAA,false
+INV-724(Invenra),CD276,GD2,4,TAA+TAA,false
+IO-312,CD3E,LILRB4,4,bridge-two-cells,false
+iPSC-derived NK cells with TGFβR2 knock-out and/or IL-15 knock-in(Cellectis),GPC3,NKP46,4,TAA+TAA,false
+JANX-009,CD274,CD28,4,bridge-two-cells,false
+JS-205,EGFR,MET,4,TAA+TAA,false
+JY102,CD3E,CD47,4,bridge-two-cells,false
+JY108,CD19,CD3E,4,bridge-two-cells,false
+JY207,CD274,CD47,4,dual-checkpoint,false
+JZC01,KDR,MICA,4,TAA+TAA,false
+K1932,CD19,CD3E,4,bridge-two-cells,false
+K333 (Luzhu Biotech),CD33,CD3E,4,bridge-two-cells,false
+KD5005,ERBB2,TNFR,4,TAA+TAA,false
+KPMW-135,CD3E,MS4A1,4,bridge-two-cells,false
+KY1055,CD274,ICOS,4,bridge-two-cells,false
+L2-U scDb,CD3E,RAS,4,bridge-two-cells,false
+LAG3-PD1,LAG3,PDCD1,4,dual-checkpoint,false
+LAVA-1223,EGFR,TCRDV2,4,TAA+TAA,false
+LB-206,CD274,CD3E,4,bridge-two-cells,false
+LILRB1/LILRB2 targeted bispecific antibody(OncoResponse),LILRB1,LILRB2,4,TAA+TAA,false
+LNK101,CD3E,MSLN,4,bridge-two-cells,false
+LVGN-1673,CD274,TGF-Β,4,TAA+TAA,false
+LVGN3036,CD274,CD40,4,TAA+TAA,false
+LVGN5287,PDCD1,TNFRSF9,4,bridge-two-cells,false
+LVGN5596,CD276,CD40,4,TAA+TAA,false
+LVGN8325,CD40,PDCD1,4,TAA+TAA,false
+MBS-304,CD3E,CLDN18,4,bridge-two-cells,false
+MBS-307,CD274,CD40,4,TAA+TAA,false
+MCLA-122,EGFR,ERBB3,4,TAA+TAA,false
+MCLA-134,PDCD1,TIM3,4,TAA+TAA,false
+MEDI-7526,CD274,CD40,4,TAA+TAA,false
+MG1122,CD3E,MSLN,4,bridge-two-cells,false
+MLB202,CD3E,MS4A1,4,bridge-two-cells,false
+MP-EV20/1959,ERBB3,LGALS3BP,4,TAA+TAA,false
+NAV-003,CD3E,MSLN,4,bridge-two-cells,false
+Nectin-4/CD3 targeted bispecific antibody,CD3E,NECTIN-4,4,bridge-two-cells,false
+NGM-936,CD3E,LILRB4,4,bridge-two-cells,false
+NI-2401,CD47,CEA,4,TAA+TAA,false
+NI-2601,CD274,CD47,4,dual-checkpoint,false
+NI-2801,CD47,ERBB2,4,TAA+TAA,false
+NI-2901,CD274,CD47,4,dual-checkpoint,false
+NILK-3301,CD28,CEA,4,bridge-two-cells,false
+OCX-909,CHI3L1,CTLA4,4,TAA+TAA,false
+ON-203,CD3E,OXMIF,4,bridge-two-cells,false
+ONC-783,CD24,CD3E,4,bridge-two-cells,false
+OR-641,LILRB1,LILRB2,4,TAA+TAA,false
+Ori-A631,CD39,CD73,4,TAA+TAA,false
+PBI-108,PDCD1,SIGLEC-15,4,TAA+TAA,false
+PBI-203,CD274,VEGFA,4,TAA+TAA,false
+PBI-205,CD274,PDCD1,4,dual-checkpoint,false
+PD-1/IL-7 targeted bispecific antibody(OSE),IL-7,PDCD1,4,TAA+TAA,false
+PD-1/LAG-3 bispecific mAbs(Xencor),LAG3,PDCD1,4,dual-checkpoint,false
+PD-L1/4-1BB BsAb,CD274,TNFRSF9,4,bridge-two-cells,false
+PD-L1/CD47 BsAb,CD274,CD47,4,dual-checkpoint,false
+PD1-LAG3 bsAb(Sutro Biopharma),LAG3,PDCD1,4,dual-checkpoint,false
+PD1-TIM3 bsAb,PDCD1,TIM3,4,TAA+TAA,false
+PIG-KM,KDR,MET,4,TAA+TAA,false
+PM-1017,IL-4RΑ,IL-5,4,TAA+TAA,false
+PM-1024,CCR8,TIGIT,4,TAA+TAA,false
+PM-1086,CD39,PDCD1,4,TAA+TAA,false
+PM-1092,CCR8,CTLA4,4,TAA+TAA,false
+PM-1130,CD4,PDCD1,4,TAA+TAA,false
+PM-1268,IL-31,IL-4RΑ,4,TAA+TAA,false
+PM-CD3-GEX,CD3E,MUC1,4,bridge-two-cells,false
+PRS-342,GPC3,TNFRSF9,4,bridge-two-cells,false
+"PT-302(Phanes Therapeutics, Inc.)",LAG3,TIM3,4,TAA+TAA,false
+PT-819,CD3E,DLL3,4,bridge-two-cells,false
+PT796,CD47,FOLR1,4,TAA+TAA,false
+QL-315,CD3E,LRRC15,4,bridge-two-cells,false
+REMD-511,CTLA4,PDCD1,4,dual-checkpoint,false
+REMD-642,CD274,CXCR4,4,TAA+TAA,false
+REMD-813,LAG3,PDCD1,4,dual-checkpoint,false
+RG6353,CD3Ε,HLA-G,4,TAA+TAA,false
+ROR1 x CD3 DART,CD3E,ROR1,4,bridge-two-cells,false
+SBT-100,KRAS,STAT3,4,TAA+TAA,false
+SCR-9171,CD3E,MUC17,4,bridge-two-cells,false
+SHR-1812,CD276,CD3E,4,bridge-two-cells,false
+Siglec-6/CD3 targeted bispecific antibody(OSU),CD3E,SIGLEC-6,4,bridge-two-cells,false
+SIRPα-PDL1,CD274,SIRP,4,TAA+TAA,false
+SLD2435,CD112R,TIGIT,4,TAA+TAA,false
+SMTE-001,CD3E,MSLN,4,bridge-two-cells,false
+SPX-301,CD274,CLDN18.2,4,TAA+TAA,false
+SRB-21,ERBB2,ERBB3,4,TAA+TAA,false
+SRB19,EGFR,ERBB3,4,TAA+TAA,false
+STL001,CD138,CD3E,4,bridge-two-cells,false
+T-903,CD274,TIGIT,4,dual-checkpoint,false
+TATX-200,CD3E,TRKB,4,bridge-two-cells,false
+TJ-C4GM,CD47,CSF-3R,4,TAA+TAA,false
+TJ-C64B,CLDN6,TNFRSF9,4,bridge-two-cells,false
+TJ-L1D5,CD274,CD73,4,TAA+TAA,false
+TR0304,CD274,LAG3,4,dual-checkpoint,false
+TR0506,CD274,LAG3,4,dual-checkpoint,false
+TRB805,CD47,SIRPΑ,4,TAA+TAA,false
+TRB805-01,CD47,SIRPΑ,4,TAA+TAA,false
+TRJ-E84,CMV PROTEIN,EGFR,4,TAA+TAA,false
+TRJ-T75,CMV PROTEIN,TROP-2,4,TAA+TAA,false
+Trop-2 x CD3 Bi-Specific Antibody,CD3E,TROP-2,4,bridge-two-cells,false
+TROP2 XPAT,CD3E,TROP-2,4,bridge-two-cells,false
+TROP2-TRACTr,CD3E,TROP-2,4,bridge-two-cells,false
+Trop2/CD3 bispecific antibody(Arbele),CD3E,TROP-2,4,bridge-two-cells,false
+Trophoblast antigen 2 tumour activated T-cell engager therapy (Janux Therapeutics/Merck & Co),CD3E,TROP-2,4,bridge-two-cells,false
+TSR-075,LAG3,PDCD1,4,dual-checkpoint,false
+TST-006,CD274,CLDN18.2,4,TAA+TAA,false
+TXB4-BC1,MS4A1,TFR1,4,TAA+TAA,false
+TYRP1-TCB,CD3E,TYRP1,4,bridge-two-cells,false
+V2-U scDb,CD3E,RAS,4,bridge-two-cells,false
+VB-611,CD3E,MOSPD2,4,bridge-two-cells,false
+VBI-001,CD38,ICAM-1,4,TAA+TAA,false
+VBI-002,CD47,ICAM-1,4,TAA+TAA,false
+VBI-003,CD47,EPCAM,4,TAA+TAA,false
+VBI-009,CD276,CD47,4,TAA+TAA,false
+VTX-002 (Venn Therapeutics),TGF-Β,ΑVΒ6,4,TAA+TAA,false
+WM-202,CD3E,MAGEA4,4,bridge-two-cells,false
+XB-628,CD274,NKG2A,4,TAA+TAA,false
+XmAb13677,CD3E,MS4A1,4,bridge-two-cells,false
+XmAb30819,CD3E,ENPP3,4,bridge-two-cells,false
+XmAb541,CD3E,CLDN6,4,bridge-two-cells,false
+YBL-008,CD274,VEGF-A,4,TAA+TAA,false
+YBL-009,CD274,TGF-Β,4,TAA+TAA,false
+YBL-013,CD274,CD3E,4,bridge-two-cells,false
+YBL-016,CD274,IL-10,4,TAA+TAA,false
+YBL-017,CD3E,DLK1,4,bridge-two-cells,false
+YBL-018,CD276,CD3E,4,bridge-two-cells,false
+YBL-020,CD274,LAG3,4,dual-checkpoint,false
+YBL-031,CD3E,MS4A1,4,bridge-two-cells,false
+YBL-032,CD3E,EGFR,4,bridge-two-cells,false
+YH-013,EGFR,MET,4,TAA+TAA,false
+YH012,ERBB2,TROP-2,4,TAA+TAA,false
+ZW-171,CD3E,MSLN,4,bridge-two-cells,false
+7D10-PAT-DX1,BAK,DNA,4,TAA+TAA,false
+anti-CD3/CD20 bispecific antibody,CD3E,MS4A1,4,bridge-two-cells,false
+anti-CEA/CD3 antibody (Jiangsu hengrui),CD3E,CEA,4,bridge-two-cells,false
+Anti-CLDN18.2/CD3 bispecific antibody,CD3E,CLDN18.2,4,bridge-two-cells,false
+anti-HGFR/EGFR antibody (Jiangsu hengrui),EGFR,MET,4,TAA+TAA,false
+anti-PD1/PDL1 antibody (Jiangsu Hengrui),CD274,PDCD1,4,dual-checkpoint,false
+anti-PD1/TGFβ antibody (Jiangsu hengrui),PDCD1,TGF-Β,4,TAA+TAA,false
+anti-PDL1/4-1BB antibody (Jiangsu hengrui),CD274,TNFRSF9,4,bridge-two-cells,false
+anti-RANKL/NGF antibody (Jiangsu hengrui),NGF,RANKL,4,TAA+TAA,false
+anti-VEGF/Ang2 antibody (Jiangsu hengrui),ANG2,VEGFA,4,TAA+TAA,false
+anti-VEGF/PDGF antibody (Jiangsu hengrui),PDGF,VEGF-A,4,TAA+TAA,false
+APL-801,CD274,CD40,4,TAA+TAA,false
+B7H3 x NKG2D NKE,CD276,NKG2D,4,TAA+TAA,false
+BP-1212,CD39,TIM3,4,TAA+TAA,false
+C-21-7D12,CD16A,EGFR,4,TAA+TAA,false
+CB-693,MSLN,TNFRSF9,4,bridge-two-cells,false
+CD137/FAP bispecific agonist antibody(Boehringer Ingelheim International GmbH),FAP,TNFRSF9,4,bridge-two-cells,false
+DM-002 (Xadcera Biopharma),ERBB3,MUC1,4,TAA+TAA,false
+EX-109,CD3E,MUC17,4,bridge-two-cells,false
+FmAb-2,EGFR,TGFBR2,4,TAA+TAA,false
+HK-006,ERBB2,TNFRSF9,4,bridge-two-cells,false
+IDC-001,CTHRC1,ZG16B,4,TAA+TAA,false
+IDC-004,VEGF-A,ZG16B,4,TAA+TAA,false
+IDC-005,CTHRC1,VEGFA,4,TAA+TAA,false
+IMM 2547,CD24,CD274,4,TAA+TAA,false
+LAE111,LILRB1,LILRB2,4,TAA+TAA,false
+LAE113,CD112R,TIGIT,4,TAA+TAA,false
+MBS-302,CD274,TGF-Β,4,TAA+TAA,false
+MBS-305,CD3E,TNFRSF17,4,bridge-two-cells,false
+MEDI-1109,CD274,TNFRSF4,4,bridge-two-cells,false
+NILK-3801,CD28,GPC3,4,bridge-two-cells,false
+Novotarg,FASR,MS4A1,4,TAA+TAA,false
+PT-790,CD3E,FOLR1,4,bridge-two-cells,false
+PT-880,CD3E,CLDN18.2,4,bridge-two-cells,false
+"ROR1/CD3 bispecific monoclonal antibody(Shandong Boan Biological Technology Co., Ltd.)",CD3E,ROR1,4,bridge-two-cells,false
+SNS-201,CD28,VISTA,4,bridge-two-cells,false
+SON-3015,IL-6,TGF-Β,4,TAA+TAA,false
+TransJoin,CD19,CD3E,4,bridge-two-cells,false
+Tumour associated antigen targeting bispecific antibody(PersonGen Biotherapeutics),CTLA4,MET,4,TAA+TAA,false
+XB-014,CD274,CD47,4,dual-checkpoint,false
+YH-010,CD274,IL-12,4,TAA+TAA,false
+JNJ-63709178,CD123,CD3E,5,bridge-two-cells,false
+A300E-BiTE,ADAM17,CD3E,5,bridge-two-cells,false
+ABBV-184,CD3E,SURVIVIN,5,bridge-two-cells,false
+ABP-120,CD3E,MS4A1,5,bridge-two-cells,false
+ABP-140,CD38,CD3E,5,bridge-two-cells,false
+ABP-160,CD274,CD47,5,dual-checkpoint,false
+AFM-11,CD19,CD3E,5,bridge-two-cells,false
+AFM12,CD16A,CD19,5,TAA+TAA,false
+AMG-330,CD33,CD3E,5,bridge-two-cells,false
+AMG-427 (Amgen),CD3E,FLT3,5,bridge-two-cells,false
+AMG-910,CD3E,CLDN18,5,bridge-two-cells,false
+Anti-CD3/anti-CD20 bispecific antibody-armed activated T-cells(National Cancer Institute),CD3E,MS4A1,5,bridge-two-cells,false
+"Anti-CD64-anti-CD30 bispecific monoclonal antibody(Medarex, Inc.)",CD30,CD64,5,TAA+TAA,false
+Anti-CD79b/CD3 bispecific antibody(Innovent Biologics),CD3E,CD79B,5,bridge-two-cells,false
+Anti-IL-12/IL-18 DVD-Ig (AbbVie),IL-12,IL-18,5,TAA+TAA,false
+APVO-210,CD86,IL-10R,5,TAA+TAA,false
+ATG-027,CD274,CD276,5,TAA+TAA,false
+AZ-17,IL-23P19,IL-6,5,TAA+TAA,false
+B728,CD274,TIGIT,5,dual-checkpoint,false
+bH1,ERBB2,VEGFA,5,TAA+TAA,false
+BI-905677,LRP5,LRP6,5,TAA+TAA,false
+Bispecific monoclonal antibody 2B1,ERBB2,FCRIII,5,TAA+TAA,false
+Briakinumab,IL-12,IL-23,5,TAA+TAA,false
+BSI-507,CD112R,PDCD1,5,TAA+TAA,false
+BSI-508,CD47,PDCD1,5,dual-checkpoint,false
+CD19/CD3,CD19,CD3E,5,bridge-two-cells,false
+CTM-041,5T4,CD40,5,TAA+TAA,false
+CTX-4419,NCR3,TNFRSF17,5,TAA+TAA,false
+DIG-KT,KDR,TIE-2,5,TAA+TAA,false
+"Duligotuzumab(Genentech, Inc.)",EGFR,ERBB3,5,TAA+TAA,false
+EI-04,EGFR,IGF-1R,5,TAA+TAA,false
+Emerfetamab,CD33,CD3E,5,bridge-two-cells,false
+Ertumaxomab,CD3E,ERBB2,5,bridge-two-cells,false
+EX-102,CD19,CD3E,5,bridge-two-cells,false
+EX-110,CD3E,DLL3,5,bridge-two-cells,false
+F6-734,CEA,DTPA,5,TAA+TAA,false
+FAP-DR5,DR5,FAP,5,TAA+TAA,false
+FBTA-05,CD3E,MS4A1,5,bridge-two-cells,false
+GBR-1302,CD3E,ERBB2,5,bridge-two-cells,false
+hMN14-734,CEA,DTPA,5,TAA+TAA,false
+IDM-1,CD64,ERBB2,5,TAA+TAA,false
+Istiratumab,ERBB3,IGF-1R,5,TAA+TAA,false
+KN-027,PDGFR,VEGFR,5,TAA+TAA,false
+MDX-210,CD64,ERBB2,5,TAA+TAA,false
+MDX-214,CD89,EGFR,5,TAA+TAA,false
+MDX-220,FCRN,TAG-72,5,TAA+TAA,false
+MDX-240,CD64,GP41,5,TAA+TAA,false
+MDX-H210,CD64,ERBB2,5,TAA+TAA,false
+MEDI-565,CD3E,CEA,5,bridge-two-cells,false
+MM-111,ERBB2,ERBB3,5,TAA+TAA,false
+Monoclonal antibody BIS-1,CD3E,EPCAM,5,bridge-two-cells,false
+MOR-209/ES414,CD3E,PSMA,5,bridge-two-cells,false
+MP-ENDOS-1959,LGALS3BP,TEM1,5,TAA+TAA,false
+ND-003,CD3E,IL-5RΑ,5,bridge-two-cells,false
+Ori--A362,CLDN18.2,TNFRSF9,5,bridge-two-cells,false
+Ori--A610,CD274,TIGIT,5,dual-checkpoint,false
+Ori-A364,CD274,CLDN18.2,5,TAA+TAA,false
+Ori-Ab-008,CD274,TIGIT,5,dual-checkpoint,false
+Pacanalotamab,CD3E,TNFRSF17,5,bridge-two-cells,false
+Pavurutamab,CD3E,TNFRSF17,5,bridge-two-cells,false
+PF-07260437,B7-H4,CD3E,5,bridge-two-cells,false
+PF-5057459,ANG2,VEGF-A,5,TAA+TAA,false
+PF-6671008,CD3E,CDH3,5,bridge-two-cells,false
+PM-1043,ERBB2,TNFRSF9,5,bridge-two-cells,false
+PMC-404,ANG2,VEGF-C,5,TAA+TAA,false
+Remtolumab,IL-17A,TNF-Α,5,TAA+TAA,false
+RG-6007,CD3E,WT1,5,bridge-two-cells,false
+RO-7444973,CD3E,MAGEA4,5,bridge-two-cells,false
+SCT-B03,CTLA4,TNFRSF4,5,bridge-two-cells,false
+SCT-B07,CD274,TGF-Β,5,TAA+TAA,false
+Solitumomab,CD3E,EPCAM,5,bridge-two-cells,false
+SRB-18,ERBB3,TRAIL,5,TAA+TAA,false
+"Tidutamab(Xencor, Inc.)",CD3E,SSTR2,5,bridge-two-cells,false
+TJ-L1C4,CD274,CD47,5,dual-checkpoint,false
+TJ-L1H3,CD274,CD276,5,TAA+TAA,false
+TJ-L1I7,CD274,IL-7,5,TAA+TAA,false
+UniTI-101,CCR2,M-CSF,5,TAA+TAA,false
+XmAb13243,CD38,CD3E,5,bridge-two-cells,false
+XmAb13551,CD38,CD3E,5,bridge-two-cells,false
+Y-111,CD274,CD3E,5,bridge-two-cells,false
+Y151,CD3E,TNFRSF17,5,bridge-two-cells,false
+Y160,CD3E,CLDN18.2,5,bridge-two-cells,false
+YBL-027,CD274,TIGIT,5,dual-checkpoint,false
+1BiMAB (Ganymed Pharmaceuticals AG),CD3E,CLDN18,5,bridge-two-cells,false
+3D-057,CD274,CD3E,5,bridge-two-cells,false
+5T4-5T4-CD3,5T4,CD3E,5,bridge-two-cells,false
+6PHU3 (BioNTech SE),CD3E,CLDN6,5,bridge-two-cells,false
+ABBV-428,CD40,MSLN,5,TAA+TAA,false
+AFM-15,ALBUMIN,CD3E,5,bridge-two-cells,false
+AMG-966,TNF-Α,VEGI,5,TAA+TAA,false
+AMG-CDH19X,CD3E,CDH19,5,bridge-two-cells,false
+Anti-CD28/anti-HMV-MAA bispecific antibody(Eberhard Karls Universitat Tubingen),CD28,HMV-MAA,5,bridge-two-cells,false
+Anti-CD3-anti-CD19 bispecific monoclonal antibody(University of Cologne),CD19,CD3E,5,bridge-two-cells,false
+Anti-CD3/ (Micromet/anti-CAIX bispecific T-cell engagerAmgen),CAIX,CD3E,5,bridge-two-cells,false
+Anti-CD3/Anti-SLAMF7 Bispecific Antibody,CD3E,SLAMF7,5,bridge-two-cells,false
+"Anti-CD40/B7-H4 Bispecific antibody(Lyvgen Biopharma Co., Ltd)",B7-H4,CD40,5,TAA+TAA,false
+"Anti-CD40/CD276 Bispecific antibody(Lyvgen Biopharma Co., Ltd)",CD276,CD40,5,TAA+TAA,false
+"Anti-CD40/CEA Bispecific antibody(Lyvgen Biopharma Co., Ltd)",CD40,CEA,5,TAA+TAA,false
+"Anti-CD40/HER2 Bispecific antibody(Lyvgen Biopharma Co., Ltd)",CD40,ERBB2,5,TAA+TAA,false
+Anti-EGFR/HER3 bispecific antibody(Biocad),EGFR,ERBB3,5,TAA+TAA,false
+Anti-HER2/CD3(Genentech),CD3E,ERBB2,5,bridge-two-cells,false
+Anti-IGF monoclonal antibodies (Shin Nippon),IGF-1,IGF-2,5,TAA+TAA,false
+Anti-IL 17/TNF-alpha Bispecific Antibody (Biocad),IL-17F,TNF-Α,5,TAA+TAA,false
+"Anti-PD-L1/TGF-β antibody(GigaGen, Inc.)",CD274,TGF-Β,5,TAA+TAA,false
+Antibody-100,EPCAM,TCR,5,TAA+TAA,false
+AP-163,CD3E,TNFRSF17,5,bridge-two-cells,false
+APVO-603,TNFRSF4,TNFRSF9,5,TAA+TAA,false
+ATOR-1015,CTLA4,TNFRSF4,5,bridge-two-cells,false
+ATOR-1144,CTLA4,TNFRSF18,5,TAA+TAA,false
+BCD-121,IL-17,TNF-Α,5,TAA+TAA,false
+BY-24.3,PDCD1,VEGFA,5,TAA+TAA,false
+C3B3-DB,HLA CLASS I ANTIGEN,P-GP,5,TAA+TAA,false
+CAN-105,F10,FACTOR IXA,5,TAA+TAA,false
+CD40/EpCAM bispecific antibody(Alligator Bioscience AB),CD40,EPCAM,5,TAA+TAA,false
+CLL1-TDB,CD3E,CLL-1,5,bridge-two-cells,false
+CYT-103(Cytovia Therapeutics),GPC3,NKP46,5,TAA+TAA,false
+CYT-106,CD38,NKP46,5,TAA+TAA,false
+CYT-303,GPC3,NKP46,5,TAA+TAA,false
+CYT-338,CD38,NKP46,5,TAA+TAA,false
+"DAAP (Aprogen, Inc.)",ANG1,VEGF-A,5,TAA+TAA,false
+DIA-10-D,BACE,Α-SECRETASE,5,TAA+TAA,false
+DMS-3008,EGFR,VEGFR,5,TAA+TAA,false
+Duta-101,PDGFR,VEGFR,5,TAA+TAA,false
+E1-3s,CD3E,TROP-2,5,bridge-two-cells,false
+Etevritamab,CD3E,EGFRVIII,5,bridge-two-cells,false
+EX-104,PDCD1,TIGIT,5,dual-checkpoint,false
+EX-107,CD3E,MSLN,5,bridge-two-cells,false
+FOLR-1-BiTE,CD3E,FOLR1,5,bridge-two-cells,false
+Fsn-1006,AREG,HBEGF,5,TAA+TAA,false
+GBR-1372(Glenmark Pharmaceuticals Ltd.),CD3E,EGFR,5,bridge-two-cells,false
+GNR-047,CD19,CD3E,5,bridge-two-cells,false
+GSK-2434735,IL-13,IL-4,5,TAA+TAA,false
+H-447,CD64,EGFR,5,TAA+TAA,false
+h8F4-BiTE,CD3E,HLA CLASS II ANTIGEN,5,bridge-two-cells,false
+HBM-7015,CD274,TGF-Β1,5,TAA+TAA,false
+HBM-7020,CD3E,TNFRSF17,5,bridge-two-cells,false
+HLX-31,CD3E,ERBB2,5,bridge-two-cells,false
+HMBD-004B,CD33,CD47,5,TAA+TAA,false
+HRS-3/A9,CD16A,CD30,5,TAA+TAA,false
+IMM2521,CD274,SIRPΑ,5,TAA+TAA,false
+IMM3202,CD47,KDR,5,TAA+TAA,false
+JNJ-0819,CD3E,HEME OXYGENASE,5,bridge-two-cells,false
+JNJ-63898081,CD3E,PSMA,5,bridge-two-cells,false
+JS-206,IL-2,PDCD1,5,TAA+TAA,false
+JS-209,CD112R,TIGIT,5,TAA+TAA,false
+KM-3907,CLDN1,CLDN3,5,TAA+TAA,false
+LQ-026,IL-17A,TNF-Α,5,TAA+TAA,false
+LY-3164530,EGFR,MET,5,TAA+TAA,false
+LY-3232094,IL-23P19,TNF-Α,5,TAA+TAA,false
+M-1231,EGFR,MUC1,5,TAA+TAA,false
+MDX-260,CD64,GD2,5,TAA+TAA,false
+PMC-002,KDR,MET,5,TAA+TAA,false
+PMC-002R,KDR,TIE-2,5,TAA+TAA,false
+PMC-122,CD274,CD47,5,dual-checkpoint,false
+PRS-332,CD274,LAG3,5,dual-checkpoint,false
+Recombinant humanized bispecific antibody,CD16A,CD274,5,TAA+TAA,false
+RO-7040547,IL-13,IL-17A,5,TAA+TAA,false
+Romilkimab,IL-13,IL-4,5,TAA+TAA,false
+SL-188,MET,PGF,5,TAA+TAA,false
+SSGJ-706,CD274,PDCD1,5,dual-checkpoint,false
+Tepoditamab,CD3E,CLL-1,5,bridge-two-cells,false
+Tibulizumab,BAFF,IL-17,5,TAA+TAA,false
+TJ-L1T6,CD274,TIGIT,5,dual-checkpoint,false
+UCB-0159,IL-17A,TNF,5,TAA+TAA,false
+VHH1D12,CD1D,TCR,5,TAA+TAA,false
+Vixtimotamab,CD33,CD3E,5,bridge-two-cells,false
+YBL-004,CD274,PDCD1,5,dual-checkpoint,false
+YH-006,CTLA4,TNFRSF4,5,bridge-two-cells,false
+BVX130-mcMMAF,CD33,CD7,5,TAA+TAA,false
+Pasotuxizumab,CD3E,PSMA,5,bridge-two-cells,false

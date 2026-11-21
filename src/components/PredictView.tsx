@@ -22,6 +22,39 @@ const QUICK_PAIRS: Array<{ label: string; g1: string; g2: string }> = [
   { label: 'PDCD1 + VEGFA', g1: 'PDCD1', g2: 'VEGFA' },
 ];
 
+const STAGE_LABELS: Record<number, string> = {
+  1: 'Stage 1 · Approved / BLA',
+  2: 'Stage 2 · Phase 3 / 2–3',
+  3: 'Stage 3 · Phase 1 / 2',
+  4: 'Stage 4 · Preclinical / IND',
+  5: 'Stage 5 · Discontinued',
+};
+
+function formatClinicalStage(prediction: PredictionResult): {
+  title: string;
+  subtitle: string;
+  isClinical: boolean;
+} {
+  if (prediction.inClinicalTrial && prediction.clinicalStage) {
+    const label =
+      STAGE_LABELS[prediction.clinicalStage] ?? `Stage ${prediction.clinicalStage}`;
+    const drugs =
+      prediction.clinicalDrugs?.length > 0
+        ? prediction.clinicalDrugs.join(', ')
+        : 'Validated clinical bispecific benchmark';
+    return {
+      title: label,
+      subtitle: `${drugs}${prediction.needsVerification ? ' · Verify' : ''}`,
+      isClinical: true,
+    };
+  }
+  return {
+    title: 'Stage 0 · Novel Candidate',
+    subtitle: 'Unbenchmarked pair scored via 5-stage hierarchy',
+    isClinical: false,
+  };
+}
+
 function renderInlineFormatted(text: string) {
   const cleaned = text
     .replace(/\$\\Delta_x\s*=\s*([^$]+)\$/g, 'Δx = $1')
@@ -408,10 +441,11 @@ export function PredictView({
     setEvalTrigger((c) => c + 1);
   }, [selectedGene1, selectedGene2]);
 
-  // Direct straight to report whenever arriving from Leaderboard / Home inspect click
+  // Keep view at the top target builder when arriving from Home / Leaderboard;
+  // only scroll down to the report when clicking "Evaluate Pair & View Report →"
   useEffect(() => {
     if (inspectNonce > 0) {
-      scrollToReport();
+      selectorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [inspectNonce]);
 
@@ -492,11 +526,13 @@ export function PredictView({
         .replace(/^#{1,4}\s+/gm, '')
         .replace(/^>\s+/gm, '');
 
+    const stageInfo = prediction ? formatClinicalStage(prediction) : null;
+
     const summaryHeader = [
       `UBHAYA-BANDHA (DUAL BINDING) — TARGET PAIR REPORT`,
       `=================================================`,
       `Target Pair:                 ${selectedGene1} + ${selectedGene2}`,
-      ...(prediction
+      ...(prediction && stageInfo
         ? [
             `Pairwise Druggability Score: ${prediction.score.toFixed(4)}`,
             `Global Candidate Rank:       #${prediction.rank.toLocaleString()} / ${(prediction.totalPairs || totalPairs).toLocaleString()}`,
@@ -512,11 +548,7 @@ export function PredictView({
                   }`,
                 ]
               : []),
-            `Clinical Benchmark Status:   ${
-              prediction.inClinicalTrial
-                ? `Stage ${prediction.clinicalStage} (${prediction.clinicalDrugs.join(', ')})`
-                : 'Exploratory'
-            }`,
+            `Clinical Progression Stage:  ${stageInfo.title} (${stageInfo.subtitle})`,
           ]
         : []),
       `Generated:                   ${new Date().toLocaleString()}`,
@@ -543,6 +575,8 @@ export function PredictView({
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+
+  const stageSummary = prediction ? formatClinicalStage(prediction) : null;
 
   return (
     <section className="space-y-10 pb-8">
@@ -575,17 +609,21 @@ export function PredictView({
 
             <div className="pt-2 space-y-2">
               <div className="text-xs font-medium text-[#6E6356]">
-                Reference pairs:
+                Reference pairs (click to load into inputs):
               </div>
               <div className="flex flex-wrap gap-2">
                 {QUICK_PAIRS.map((preset) => {
                   const isActive =
-                    selectedGene1 === preset.g1 && selectedGene2 === preset.g2;
+                    draftG1 === preset.g1 && draftG2 === preset.g2;
                   return (
                     <button
                       key={preset.label}
                       type="button"
-                      onClick={() => handleEvaluate(preset.g1, preset.g2)}
+                      onClick={() => {
+                        setPredError(null);
+                        setDraftG1(preset.g1);
+                        setDraftG2(preset.g2);
+                      }}
                       className={`px-3 py-1.5 text-xs font-mono rounded-lg border transition-colors cursor-pointer ${
                         isActive
                           ? 'border-[#2D241E] bg-[#2D241E] text-[#FFFEFC] font-medium'
@@ -676,7 +714,7 @@ export function PredictView({
         className="scroll-mt-20 space-y-5"
       >
         {/* Unified 4-Column Summary Metric Strip */}
-        {prediction && !predLoading && (
+        {prediction && !predLoading && stageSummary && (
           <div className="bg-[#FFFEFC] border border-[#E3D9CA] rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#EAE2D6]">
             <div className="p-5">
               <div className="text-xs font-medium text-[#7A6E61]">
@@ -729,28 +767,18 @@ export function PredictView({
 
             <div className="p-5">
               <div className="text-xs font-medium text-[#7A6E61]">
-                Clinical Benchmark Status
+                Clinical Progression Stage
               </div>
-              {prediction.inClinicalTrial ? (
-                <>
-                  <div className="mt-2 text-lg font-semibold text-[#2F5A3B]">
-                    Stage {prediction.clinicalStage}
-                  </div>
-                  <div className="mt-1.5 text-xs text-[#574D43] truncate">
-                    {prediction.clinicalDrugs.join(', ')}
-                    {prediction.needsVerification ? ' · Verify' : ''}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="mt-2 text-lg font-semibold text-[#7C5333]">
-                    Exploratory
-                  </div>
-                  <div className="mt-1.5 text-xs text-[#7A6E61]">
-                    Not in seeded clinical drug table
-                  </div>
-                </>
-              )}
+              <div
+                className={`mt-2 text-lg font-semibold ${
+                  stageSummary.isClinical ? 'text-[#2F5A3B]' : 'text-[#7C5333]'
+                }`}
+              >
+                {stageSummary.title}
+              </div>
+              <div className="mt-1.5 text-xs text-[#574D43] truncate" title={stageSummary.subtitle}>
+                {stageSummary.subtitle}
+              </div>
             </div>
           </div>
         )}

@@ -440,9 +440,9 @@ export function HomeView({
 
         <div className="pt-4 border-t border-[#EAE2D6] text-xs sm:text-[13px] text-[#574D43] leading-relaxed">
           <strong className="font-semibold text-[#231D18]">
-            What about Exploratory pairs?
+            What about Stage 0 (Novel Discovery Candidates)?
           </strong>{' '}
-          Pairs labeled <span className="font-mono text-[#231D18]">Exploratory</span> do not yet appear in the seeded clinical drug table — these represent novel target combinations where Ubhaya-Bandha surfaces promising candidates for early discovery.
+          Pairs labeled <span className="font-mono text-[#231D18]">Stage 0 · Novel Candidate</span> do not yet appear in the 791-drug clinical benchmark table — these represent unbenchmarked target combinations scored through the 5-stage pairwise hierarchy to surface promising de novo bispecific candidates.
         </div>
       </div>
 
@@ -499,7 +499,7 @@ export function HomeView({
               Respects clinical maturity stages
             </h3>
             <p className="text-sm text-[#574D43] leading-relaxed">
-              Target combinations are not simply binary “good” or “bad.” NDCG accounts for multi-level clinical evidence — rewarding approved and Phase III clinical pairs above early preclinical or exploratory candidates.
+              Target combinations are not simply binary “good” or “bad.” NDCG accounts for multi-level clinical evidence — rewarding approved and Phase III clinical pairs above early preclinical or novel candidates.
             </p>
           </div>
 
