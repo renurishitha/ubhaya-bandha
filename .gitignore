@@ -5,5 +5,4 @@ dist/
 *.tar
 *.gz
 *.rds
-*.joblib
 *.h5ad

@@ -171,7 +171,6 @@ export function HomeView({
                 role="img"
                 aria-label="Scientific schematic of a Y-shaped bispecific antibody engaging Target A (CD3) and Target B (EGFR)"
               >
-                {/* Subtle coordinate reference rings */}
                 <circle
                   cx="190"
                   cy="112"
@@ -190,7 +189,6 @@ export function HomeView({
                   strokeWidth="1"
                 />
 
-                {/* Engagement lines */}
                 <line
                   x1="126"
                   y1="76"
@@ -210,7 +208,6 @@ export function HomeView({
                   strokeDasharray="2 3"
                 />
 
-                {/* Target A (Left Antigen) */}
                 <circle cx="94" cy="54" r="27" fill="#F5EDE1" stroke="#7C5333" strokeWidth="1.75" />
                 <text
                   x="94"
@@ -229,7 +226,6 @@ export function HomeView({
                   Target A
                 </text>
 
-                {/* Target B (Right Antigen) */}
                 <circle cx="286" cy="54" r="27" fill="#EDF4EE" stroke="#2F5A3B" strokeWidth="1.75" />
                 <text
                   x="286"
@@ -248,7 +244,6 @@ export function HomeView({
                   Target B
                 </text>
 
-                {/* Y-shaped Bispecific Antibody */}
                 <path
                   d="M190 124 L126 76"
                   stroke="#7C5333"
@@ -269,7 +264,6 @@ export function HomeView({
                 />
                 <circle cx="190" cy="124" r="8.5" fill="#FFFEFC" stroke="#2D241E" strokeWidth="3" />
 
-                {/* Clean subtle domain captions */}
                 <text x="148" y="114" textAnchor="end" className="fill-[#7C5333] text-[9px] font-mono">
                   Fab Arm 1
                 </text>
@@ -490,7 +484,6 @@ export function HomeView({
           </div>
         </div>
 
-        {/* Three Clean Text Columns (No Nested Boxes) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-2">
             <div className="text-xs font-mono text-[#7C5333]">01. Top-rank focus</div>
@@ -523,7 +516,6 @@ export function HomeView({
           </div>
         </div>
 
-        {/* Clean Rank-Weight Decay Bar + Model Card Link */}
         <div className="pt-6 border-t border-[#EAE2D6] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="flex-1 space-y-3">
             <div className="text-xs font-medium text-[#574D43]">
