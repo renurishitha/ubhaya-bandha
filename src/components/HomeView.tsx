@@ -82,10 +82,19 @@ export function HomeView({
   onNavigateTab,
   onInspectPair,
 }: HomeViewProps) {
-
   const scrollToAbout = () => {
     const el = document.getElementById('how-bsab-works');
     el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const goToTab = (tab: ActiveTab) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onNavigateTab(tab);
+  };
+
+  const inspectWithTopScroll = (g1: string, g2: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onInspectPair(g1, g2);
   };
 
   return (
@@ -121,7 +130,7 @@ export function HomeView({
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
                 type="button"
-                onClick={() => onNavigateTab('predict')}
+                onClick={() => goToTab('predict')}
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-[#FFFEFC] bg-[#2D241E] hover:bg-[#1E1713] rounded-lg transition-colors cursor-pointer"
               >
                 Open Pair Explorer
@@ -404,17 +413,17 @@ export function HomeView({
         </div>
       </div>
 
-      {/* 4b. Clinical Benchmark Taxonomy (Understanding the 5 clinical stages) */}
+      {/* 4b. Clinical Progression Taxonomy (Understanding the 5 clinical stages) */}
       <div className="bg-[#FFFEFC] border border-[#E3D9CA] rounded-2xl p-8 lg:p-10 space-y-6">
         <div className="space-y-2 max-w-3xl">
           <div className="text-xs font-medium text-[#7C5333]">
-            Clinical benchmark taxonomy
+            Clinical progression taxonomy
           </div>
           <h2 className="text-2xl sm:text-3xl font-semibold text-[#231D18]">
             Understanding the 5 clinical stages
           </h2>
           <p className="text-sm text-[#574D43] leading-relaxed">
-            Throughout the Leaderboard and Target Reports, benchmarked bispecific antibody combinations are labeled across five clinical development stages — ordered from regulatory-approved therapies down to discontinued programs — which directly guide how our pairwise model learns therapeutic relevance.
+            Throughout the Leaderboard and Target Reports, known bispecific antibody combinations from the 791-drug clinical trial dataset are labeled across five clinical development stages — ordered from regulatory-approved therapies down to discontinued programs — which directly guide how our pairwise model learns therapeutic relevance.
           </p>
         </div>
 
@@ -442,7 +451,7 @@ export function HomeView({
           <strong className="font-semibold text-[#231D18]">
             What about Stage 0 (Novel Discovery Candidates)?
           </strong>{' '}
-          Pairs labeled <span className="font-mono text-[#231D18]">Stage 0 · Novel Candidate</span> do not yet appear in the 791-drug clinical benchmark table — these represent unbenchmarked target combinations scored through the 5-stage pairwise hierarchy to surface promising de novo bispecific candidates.
+          Pairs labeled <span className="font-mono text-[#231D18]">Stage 0 · Novel Candidate</span> do not yet appear in the 791-drug clinical trial dataset — these represent unbenchmarked target combinations scored through the 5-stage pairwise hierarchy to surface promising de novo bispecific candidates.
         </div>
       </div>
 
@@ -558,7 +567,7 @@ export function HomeView({
 
           <button
             type="button"
-            onClick={() => onNavigateTab('model-card')}
+            onClick={() => goToTab('model-card')}
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-medium text-[#231D18] bg-[#F7F2EA] hover:bg-[#EFE7DC] border border-[#DFD4C3] rounded-lg transition-colors cursor-pointer shrink-0 self-start lg:self-center"
           >
             Inspect 5-fold validation
@@ -583,7 +592,7 @@ export function HomeView({
               <button
                 key={item.label}
                 type="button"
-                onClick={() => onInspectPair(item.g1, item.g2)}
+                onClick={() => inspectWithTopScroll(item.g1, item.g2)}
                 className="px-3 py-1.5 rounded-lg bg-[#FFFEFC] hover:bg-[#FAF6F0] border border-[#DFD4C3] text-[#231D18] font-mono text-xs transition-colors cursor-pointer"
               >
                 {item.label}
@@ -595,7 +604,7 @@ export function HomeView({
         <div className="flex flex-wrap items-center gap-3 shrink-0">
           <button
             type="button"
-            onClick={() => onNavigateTab('predict')}
+            onClick={() => goToTab('predict')}
             className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#FFFEFC] bg-[#2D241E] hover:bg-[#1E1713] rounded-lg transition-colors cursor-pointer"
           >
             Explore target pairs
@@ -604,7 +613,7 @@ export function HomeView({
 
           <button
             type="button"
-            onClick={() => onNavigateTab('leaderboard')}
+            onClick={() => goToTab('leaderboard')}
             className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium text-[#231D18] bg-[#FFFEFC] hover:bg-[#FAF6F0] border border-[#DFD4C3] rounded-lg transition-colors cursor-pointer"
           >
             View Leaderboard
