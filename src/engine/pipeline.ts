@@ -40,6 +40,29 @@ import type {
 
 export const MODEL_VERSION = 'BSPAI-PairwiseXGB-v1.1.0';
 
+const GENE_ALIASES: Record<string, string> = {
+  CD20: 'MS4A1',
+  'PD-1': 'PDCD1',
+  PD1: 'PDCD1',
+  'PD-L1': 'CD274',
+  PDL1: 'CD274',
+  'CTLA-4': 'CTLA4',
+  BCMA: 'TNFRSF17',
+  CD3: 'CD3E',
+  'C-MET': 'MET',
+  HER2: 'ERBB2',
+  HER3: 'ERBB3',
+  '4-1BB': 'TNFRSF9',
+};
+
+function normalizeGeneSymbol(sym: string, rt?: PipelineRuntime): string {
+  const cleaned = sym.trim().toUpperCase();
+  const aliased = GENE_ALIASES[cleaned] ?? cleaned;
+  if (rt?.preprocessed.geneIndex.has(aliased)) return aliased;
+  if (rt?.preprocessed.geneIndex.has(cleaned)) return cleaned;
+  return aliased;
+}
+
 export interface PipelineRuntime {
   seed: number;
   datasetId: string;
@@ -58,6 +81,7 @@ export interface PipelineRuntime {
   topFeatureImportances: FeatureImportanceItem[];
   totalPairs: number;
   rankedPairs: CandidatePrediction[];
+  allScores: number[];
   pairRankLookup: Map<string, { score: number; rank: number }>;
 }
 
@@ -159,7 +183,6 @@ export function runAndPersistPipeline(
     5
   );
 
-  // Score all G*(G-1)/2 candidate pairs (guaranteed in [0, 1])
   const numFeatures = featureCtx.featureNames.length;
   const scored: Array<{
     rowIdx: number;
@@ -252,8 +275,10 @@ function hydrateFromArtifacts(
   labelMap: Map<string, PairLabelRecord>
 ): PipelineRuntime {
   const pairRankLookup = new Map<string, { score: number; rank: number }>();
+  const allScores: number[] = [];
   for (const item of saved.rankedSummary) {
     pairRankLookup.set(item.pairKey, { score: item.score, rank: item.rank });
+    allScores.push(item.score);
   }
 
   const runtime: PipelineRuntime = {
@@ -274,6 +299,7 @@ function hydrateFromArtifacts(
     topFeatureImportances: saved.topFeatureImportances,
     totalPairs: saved.totalPairs,
     rankedPairs: [],
+    allScores,
     pairRankLookup,
   };
 
@@ -340,13 +366,19 @@ export function buildPredictionObject(
   preScore?: number,
   preRank?: number
 ): CandidatePrediction {
-  const g1 = gene1Input.trim().toUpperCase();
-  const g2 = gene2Input.trim().toUpperCase();
-  if (!g1 || !g2) {
+  const raw1 = gene1Input.trim().toUpperCase();
+  const raw2 = gene2Input.trim().toUpperCase();
+  if (!raw1 || !raw2) {
     throw new Error('Please enter both target gene symbols.');
   }
+  if (raw1 === raw2) {
+    throw new Error(`Please select two distinct target genes (received ${raw1} twice).`);
+  }
+
+  const g1 = normalizeGeneSymbol(raw1, rt);
+  const g2 = normalizeGeneSymbol(raw2, rt);
   if (g1 === g2) {
-    throw new Error(`Please select two distinct target genes (received ${g1} twice).`);
+    throw new Error(`Please select two distinct target genes (resolved both to ${g1}).`);
   }
 
   const idx1 = rt.preprocessed.geneIndex.get(g1);
@@ -370,14 +402,8 @@ export function buildPredictionObject(
 
   let rank = preRank ?? cached?.rank;
   if (rank === undefined) {
-    const higherCount = rt.rankedPairs.filter((p) => p.score > score).length;
-    rank = Math.min(
-      rt.totalPairs,
-      Math.max(
-        1,
-        Math.round((higherCount / Math.max(1, rt.rankedPairs.length)) * rt.totalPairs) || 1
-      )
-    );
+    const higherCount = rt.allScores.filter((s) => s > score).length;
+    rank = Math.min(rt.totalPairs, higherCount + 1);
   }
 
   const labelRec = rt.labelMap.get(pairKey);
