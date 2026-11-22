@@ -33,11 +33,10 @@ function csvEscape(val: unknown): string {
   return s;
 }
 
-export function createBspaiApp(rt: PipelineRuntime) {
+export function createBspaiApp(rt: PipelineRuntime, getReady: () => boolean) {
   const app = express();
   app.use(express.json({ limit: '1mb' }));
 
-  // Allow cross-origin local frontend connections (e.g., Vite on another port)
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -49,7 +48,35 @@ export function createBspaiApp(rt: PipelineRuntime) {
     next();
   });
 
-  // Optional server-side proxy to an external Python/FastAPI backend
+  app.get('/api/health', (_req, res) => {
+    if (!getReady()) {
+      res.status(200).json({ ok: true, status: 'warming_up' });
+      return;
+    }
+    res.json({
+      ok: true,
+      status: 'ready',
+      datasetId: rt.datasetId,
+      dataMode: rt.dataMode,
+      seed: rt.seed,
+      modelVersion: rt.modelVersion,
+      geneCount: rt.genes.length,
+      totalCandidatePairs: rt.totalPairs,
+    });
+  });
+
+  app.use((req, res, next) => {
+    if (req.path === '/api/health') {
+      next();
+      return;
+    }
+    if (!getReady() && req.path.startsWith('/api')) {
+      res.status(503).json({ error: 'Pipeline is still initializing. Please retry in a moment.' });
+      return;
+    }
+    next();
+  });
+
   const externalBackend = (process.env.EXTERNAL_BACKEND_URL ?? '').trim().replace(/\/+$/, '');
   if (externalBackend) {
     console.log(`[BSPAI] External backend proxy enabled -> ${externalBackend}`);
@@ -618,18 +645,6 @@ export function createBspaiApp(rt: PipelineRuntime) {
     }
   };
 
-  app.get('/api/health', (_req, res) =>
-    res.json({
-      ok: true,
-      datasetId: rt.datasetId,
-      dataMode: rt.dataMode,
-      seed: rt.seed,
-      modelVersion: rt.modelVersion,
-      geneCount: rt.genes.length,
-      totalCandidatePairs: rt.totalPairs,
-    })
-  );
-
   for (const prefix of ['/api', '']) {
     app.get(`${prefix}/genes`, handleGenes);
     app.post(`${prefix}/predict`, handlePredict);
@@ -651,14 +666,21 @@ export function createBspaiApp(rt: PipelineRuntime) {
 async function startServer() {
   const validatedModel = resolveAndValidateGeminiModel();
   const seed = Number(process.env.BSPAI_SEED ?? 42);
-  console.log(`[BSPAI] Initializing pipeline (seed=${seed}, geminiModel=${validatedModel})...`);
-  const runtime = runAndPersistPipeline(seed, false);
-  console.log(
-    `[BSPAI] Ready: ${runtime.genes.length} genes, ${runtime.totalPairs.toLocaleString()} candidate pairs.`
-  );
-
-  const app = createBspaiApp(runtime);
   const port = Number(process.env.PORT ?? 3000);
+
+  let runtime: PipelineRuntime | null = null;
+  let ready = false;
+
+  const runtimeProxy = new Proxy({} as PipelineRuntime, {
+    get(_target, prop) {
+      if (!runtime) {
+        throw new Error('Pipeline runtime is still initializing.');
+      }
+      return Reflect.get(runtime, prop);
+    },
+  });
+
+  const app = createBspaiApp(runtimeProxy, () => ready);
 
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
@@ -676,14 +698,22 @@ async function startServer() {
 
   app.listen(port, '0.0.0.0', () => {
     console.log(`[BSPAI] Server listening on http://0.0.0.0:${port}`);
+    console.log(`[BSPAI] Initializing pipeline (seed=${seed}, geminiModel=${validatedModel})...`);
+    setImmediate(() => {
+      try {
+        runtime = runAndPersistPipeline(seed, false);
+        ready = true;
+        console.log(
+          `[BSPAI] Ready: ${runtime.genes.length} genes, ${runtime.totalPairs.toLocaleString()} candidate pairs.`
+        );
+      } catch (err) {
+        console.error('[BSPAI] Pipeline initialization failed:', err);
+      }
+    });
   });
 }
 
-const isEntrypoint =
-  process.argv[1] && path.resolve(process.argv[1]).endsWith('server.ts');
-if (isEntrypoint) {
-  startServer().catch((err) => {
-    console.error('[BSPAI] Fatal server error:', err);
-    process.exit(1);
-  });
-}
+startServer().catch((err) => {
+  console.error('[BSPAI] Fatal server error:', err);
+  process.exit(1);
+});
