@@ -441,8 +441,6 @@ export function PredictView({
     setEvalTrigger((c) => c + 1);
   }, [selectedGene1, selectedGene2]);
 
-  // Keep view at the top target builder when arriving from Home / Leaderboard;
-  // only scroll down to the report when clicking "Evaluate Pair & View Report →"
   useEffect(() => {
     if (inspectNonce > 0) {
       selectorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -514,6 +512,15 @@ export function PredictView({
     scrollToReport();
   };
 
+  const resolvedG1 = prediction?.gene1 ?? selectedGene1;
+  const resolvedG2 = prediction?.gene2 ?? selectedGene2;
+  const hasAliasMapping =
+    resolvedG1 !== selectedGene1.trim().toUpperCase() ||
+    resolvedG2 !== selectedGene2.trim().toUpperCase();
+  const reportTitlePair = hasAliasMapping
+    ? `${resolvedG1} + ${resolvedG2} (${selectedGene1.trim().toUpperCase()} + ${selectedGene2.trim().toUpperCase()})`
+    : `${resolvedG1} + ${resolvedG2}`;
+
   const handleDownloadReport = () => {
     if (!report) return;
     const stripMd = (md: string) =>
@@ -531,7 +538,7 @@ export function PredictView({
     const summaryHeader = [
       `UBHAYA-BANDHA (DUAL BINDING) — TARGET PAIR REPORT`,
       `=================================================`,
-      `Target Pair:                 ${selectedGene1} + ${selectedGene2}`,
+      `Target Pair:                 ${reportTitlePair}`,
       ...(prediction && stageInfo
         ? [
             `Pairwise Druggability Score: ${prediction.score.toFixed(4)}`,
@@ -569,7 +576,7 @@ export function PredictView({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Ubhaya-Bandha_${selectedGene1}_${selectedGene2}_Report.txt`;
+    link.download = `Ubhaya-Bandha_${resolvedG1}_${resolvedG2}_Report.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -792,7 +799,7 @@ export function PredictView({
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-[#231D18]">
-                  Target Combination Report — {selectedGene1} + {selectedGene2}
+                  Target Combination Report — {reportTitlePair}
                 </h2>
                 <p className="text-xs text-[#6E6356] mt-0.5">
                   Plain-English summary and quantitative breakdown grounded in Pairwise Druggability Score
@@ -870,7 +877,7 @@ export function PredictView({
           <div className="p-6 sm:p-8 max-w-4xl">
             {reportLoading && !report ? (
               <div className="py-10 text-center text-sm text-[#7A6E61]">
-                Preparing readable and technical reports for {selectedGene1} + {selectedGene2}...
+                Preparing readable and technical reports for {reportTitlePair}...
               </div>
             ) : reportError ? (
               <div className="p-4 bg-[#FDF4F0] border border-[#E5C1B5] rounded-xl text-sm text-[#853826]">
@@ -904,14 +911,14 @@ export function PredictView({
             Binding Mechanism &amp; 3D Structure Animations
           </h2>
           <p className="text-sm text-[#665B4F]">
-            Visual walkthrough of how a bispecific antibody engages {selectedGene1} + {selectedGene2} and how their 3D folded structures fit together.
+            Visual walkthrough of how a bispecific antibody engages {resolvedG1} + {resolvedG2} and how their 3D folded structures fit together.
           </p>
         </div>
 
         {/* Live 3D Dual-Target Binding Animation */}
         <BispecificBindingAnimation
-          gene1={prediction?.gene1 ?? selectedGene1}
-          gene2={prediction?.gene2 ?? selectedGene2}
+          gene1={resolvedG1}
+          gene2={resolvedG2}
           bias1={prediction?.gene1Info?.cell_bias}
           bias2={prediction?.gene2Info?.cell_bias}
           mechanismType={prediction?.mechanismType}
@@ -923,8 +930,8 @@ export function PredictView({
 
         {/* AlphaFold 3D Protein Structure & GNN Residue-Graph Animation */}
         <AlphaFold3DViewer
-          gene1={prediction?.gene1 ?? selectedGene1}
-          gene2={prediction?.gene2 ?? selectedGene2}
+          gene1={resolvedG1}
+          gene2={resolvedG2}
           mechanismType={prediction?.mechanismType}
           pairGnn={prediction?.structuralGnn}
         />
