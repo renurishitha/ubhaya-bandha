@@ -2,6 +2,8 @@ import { ArrowLeftRight, ArrowUp, Check, ChevronDown, Download, FileText, Refres
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { bspaiClient } from '../api/bspaiClient.ts';
 import type { GeneInfo, PredictionResult, RagReportResult } from '../types.ts';
+import { AlphaFold3DViewer } from './AlphaFold3DViewer.tsx';
+import { BispecificBindingAnimation } from './BispecificBindingAnimation.tsx';
 
 interface PredictViewProps {
   genes: GeneInfo[];
@@ -417,6 +419,7 @@ export function PredictView({
   const [prediction, setPrediction] = useState<PredictionResult | null>(null);
   const [predLoading, setPredLoading] = useState(true);
   const [predError, setPredError] = useState<string | null>(null);
+  const [evalTrigger, setEvalTrigger] = useState(0);
 
   const [report, setReport] = useState<RagReportResult | null>(null);
   const [reportLoading, setReportLoading] = useState(false);
@@ -435,6 +438,7 @@ export function PredictView({
   useEffect(() => {
     setDraftG1(selectedGene1);
     setDraftG2(selectedGene2);
+    setEvalTrigger((c) => c + 1);
   }, [selectedGene1, selectedGene2]);
 
   useEffect(() => {
@@ -504,6 +508,7 @@ export function PredictView({
     setPredError(null);
     setDraftG1(clean1);
     setDraftG2(clean2);
+    setEvalTrigger((c) => c + 1);
     onChangePair(clean1, clean2);
     scrollToReport();
   };
@@ -517,6 +522,8 @@ export function PredictView({
   const reportTitlePair = hasAliasMapping
     ? `${resolvedG1} + ${resolvedG2} (${selectedGene1.trim().toUpperCase()} + ${selectedGene2.trim().toUpperCase()})`
     : `${resolvedG1} + ${resolvedG2}`;
+
+  const isValidPair = Boolean(prediction) && !predError;
 
   const handleDownloadReport = () => {
     if (!report) return;
@@ -541,6 +548,17 @@ export function PredictView({
             `Pairwise Druggability Score: ${prediction.score.toFixed(4)}`,
             `Global Candidate Rank:       #${prediction.rank.toLocaleString()} / ${(prediction.totalPairs || totalPairs).toLocaleString()}`,
             `Mechanism Class:             ${prediction.mechanismType}`,
+            ...(prediction.structuralGnn
+              ? [
+                  `3D Structural Fit Verdict:   ${
+                    prediction.structuralGnn.bindingAssessment.verdict === 'conditional-bind'
+                      ? `Partial Fit (${prediction.structuralGnn.bindingAssessment.fitPercent}% — requires linker/Fab spacing optimization)`
+                      : prediction.structuralGnn.bindingAssessment.verdict === 'blocked'
+                        ? `Blocked (${prediction.structuralGnn.bindingAssessment.fitPercent}% — structural/accessibility barrier)`
+                        : `Full Structural Fit (${prediction.structuralGnn.bindingAssessment.fitPercent}%)`
+                  }`,
+                ]
+              : []),
             `Clinical Progression Stage:  ${stageInfo.title} (${stageInfo.subtitle})`,
           ]
         : []),
@@ -573,6 +591,7 @@ export function PredictView({
 
   return (
     <section className="space-y-10 pb-8">
+      {/* 1. Target Pair Builder Console */}
       <div
         ref={selectorRef}
         className="bg-[#FFFEFC] border border-[#E3D9CA] rounded-2xl p-7 sm:p-8 lg:p-10"
@@ -587,13 +606,15 @@ export function PredictView({
               <span className="text-[#7C5333] italic font-medium">target pair</span>
             </h1>
             <p className="text-sm sm:text-[15px] text-[#574D43] leading-relaxed">
-              Select from curated targets or type any two gene symbols in our cohort to compute their Pairwise Druggability Score and open the decision report.
+              Select from curated targets or type any two gene symbols in our cohort to compute their Pairwise Druggability Score, open the decision report, and inspect 3D structural binding simulations below.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#7A6E61]">
               <span>Select or type any two targets</span>
               <span aria-hidden="true">·</span>
               <span>Review decision report</span>
+              <span aria-hidden="true">·</span>
+              <span>Inspect 3D binding below</span>
             </div>
 
             <div className="pt-2 space-y-2">
@@ -696,6 +717,7 @@ export function PredictView({
         </div>
       </div>
 
+      {/* 2. Target Combination Evaluation Report */}
       <div
         ref={reportRef}
         className="scroll-mt-20 space-y-5"
@@ -878,6 +900,42 @@ export function PredictView({
           </div>
         </div>
       </div>
+
+      {/* 3. Interactive Animations BELOW the Report — only rendered for valid pairs */}
+      {isValidPair && prediction && (
+        <div className="space-y-5 pt-2">
+          <div className="space-y-1">
+            <div className="text-xs font-medium text-[#7C5333]">
+              3D structural visualizations
+            </div>
+            <h2 className="text-2xl font-semibold text-[#231D18]">
+              Binding Mechanism &amp; 3D Structure Animations
+            </h2>
+            <p className="text-sm text-[#665B4F]">
+              Visual walkthrough of how a bispecific antibody engages {prediction.gene1} + {prediction.gene2} and how their 3D folded structures fit together.
+            </p>
+          </div>
+
+          <BispecificBindingAnimation
+            gene1={prediction.gene1}
+            gene2={prediction.gene2}
+            bias1={prediction.gene1Info?.cell_bias}
+            bias2={prediction.gene2Info?.cell_bias}
+            mechanismType={prediction.mechanismType}
+            bindingVerdict={prediction.structuralGnn?.bindingAssessment?.verdict}
+            score={prediction.score}
+            loading={predLoading}
+            evalTrigger={evalTrigger}
+          />
+
+          <AlphaFold3DViewer
+            gene1={prediction.gene1}
+            gene2={prediction.gene2}
+            mechanismType={prediction.mechanismType}
+            pairGnn={prediction.structuralGnn}
+          />
+        </div>
+      )}
     </section>
   );
 }
