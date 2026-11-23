@@ -333,7 +333,7 @@ function GeneAutocomplete({
             <span>
               {isFiltering && cleanQuery
                 ? `${matches.length} curated match${matches.length === 1 ? '' : 'es'}`
-                : `Curated targets (${matches.length}) · or type any scRNA-seq gene`}
+                : `Curated targets (${matches.length}) · or type any cohort gene`}
             </span>
             <span className="font-mono text-[10px]">Free text supported</span>
           </div>
@@ -348,7 +348,7 @@ function GeneAutocomplete({
               className="w-full text-left px-3.5 py-2.5 bg-[#F6FAF7] hover:bg-[#EDF5EF] border-b border-[#DCE8DF] flex items-center justify-between gap-3 transition-colors cursor-pointer"
             >
               <span className="font-mono text-xs font-semibold text-[#2F5A3B]">
-                Use “{cleanQuery}” (scRNA-seq cohort lookup)
+                Use “{cleanQuery}” (cohort &amp; clinical lookup)
               </span>
               <span className="text-[11px] text-[#4C6854]">
                 Custom symbol
@@ -358,9 +358,9 @@ function GeneAutocomplete({
 
           {matches.length === 0 ? (
             <div className="px-3.5 py-3 text-xs text-[#6E6356]">
-              Not in the 327 curated surface targets — click above or press{' '}
+              Not in the curated surface targets — click above or press{' '}
               <strong className="font-semibold text-[#231D18]">Evaluate Pair</strong>{' '}
-              to query <span className="font-mono text-[#231D18]">{cleanQuery}</span> directly from the single-cell matrix.
+              to validate <span className="font-mono text-[#231D18]">{cleanQuery}</span> against the expression matrix and clinical dataset.
             </div>
           ) : (
             <ul className="max-h-64 overflow-y-auto divide-y divide-[#F0E9DD]">
@@ -485,6 +485,7 @@ export function PredictView({
       .catch((err) => {
         if (!cancelled) {
           setReportError(err instanceof Error ? err.message : 'Failed to generate report');
+          setReport(null);
         }
       })
       .finally(() => {
@@ -520,6 +521,9 @@ export function PredictView({
   const reportTitlePair = hasAliasMapping
     ? `${resolvedG1} + ${resolvedG2} (${selectedGene1.trim().toUpperCase()} + ${selectedGene2.trim().toUpperCase()})`
     : `${resolvedG1} + ${resolvedG2}`;
+
+  const safeGene1 = predError ? 'CD274' : (prediction?.gene1 ?? 'CD274');
+  const safeGene2 = predError ? 'CTLA4' : (prediction?.gene2 ?? 'CTLA4');
 
   const handleDownloadReport = () => {
     if (!report) return;
@@ -603,7 +607,7 @@ export function PredictView({
               <span className="text-[#7C5333] italic font-medium">target pair</span>
             </h1>
             <p className="text-sm sm:text-[15px] text-[#574D43] leading-relaxed">
-              Select from curated targets or type any two gene symbols in our single-cell cohort to compute their Pairwise Druggability Score, open the decision report, and inspect 3D structural binding simulations below.
+              Select from curated targets or type any two gene symbols in our cohort to compute their Pairwise Druggability Score, open the decision report, and inspect 3D structural binding simulations below.
             </p>
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#7A6E61]">
@@ -911,14 +915,14 @@ export function PredictView({
             Binding Mechanism &amp; 3D Structure Animations
           </h2>
           <p className="text-sm text-[#665B4F]">
-            Visual walkthrough of how a bispecific antibody engages {resolvedG1} + {resolvedG2} and how their 3D folded structures fit together.
+            Visual walkthrough of how a bispecific antibody engages {safeGene1} + {safeGene2} and how their 3D folded structures fit together.
           </p>
         </div>
 
         {/* Live 3D Dual-Target Binding Animation */}
         <BispecificBindingAnimation
-          gene1={resolvedG1}
-          gene2={resolvedG2}
+          gene1={safeGene1}
+          gene2={safeGene2}
           bias1={prediction?.gene1Info?.cell_bias}
           bias2={prediction?.gene2Info?.cell_bias}
           mechanismType={prediction?.mechanismType}
@@ -930,8 +934,8 @@ export function PredictView({
 
         {/* AlphaFold 3D Protein Structure & GNN Residue-Graph Animation */}
         <AlphaFold3DViewer
-          gene1={resolvedG1}
-          gene2={resolvedG2}
+          gene1={safeGene1}
+          gene2={safeGene2}
           mechanismType={prediction?.mechanismType}
           pairGnn={prediction?.structuralGnn}
         />
