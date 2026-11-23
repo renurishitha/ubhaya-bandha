@@ -63,6 +63,35 @@ function normalizeGeneSymbol(sym: string, rt?: PipelineRuntime): string {
   return aliased;
 }
 
+function isKnownTargetSymbol(
+  rt: PipelineRuntime,
+  rawSym: string,
+  normalizedSym: string
+): boolean {
+  const raw = rawSym.trim().toUpperCase();
+  const norm = normalizedSym.trim().toUpperCase();
+
+  if (
+    rt.preprocessed.geneIndex.has(norm) ||
+    rt.preprocessed.geneIndex.has(raw) ||
+    rt.geneMap.has(norm) ||
+    rt.geneMap.has(raw) ||
+    Boolean(GENE_ALIASES[raw])
+  ) {
+    return true;
+  }
+
+  for (const [key, rec] of rt.labelMap.entries()) {
+    const pairStr = String((rec as { pairKey?: string }).pairKey ?? key).toUpperCase();
+    const parts = pairStr.split(/__|(\s*\+\s*)|_/);
+    if (parts.includes(norm) || parts.includes(raw)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export interface PipelineRuntime {
   seed: number;
   datasetId: string;
@@ -205,7 +234,9 @@ export function runAndPersistPipeline(
       pairKey: canonicalPairKey(g1, g2),
       g1: g1 < g2 ? g1 : g2,
       g2: g1 < g2 ? g2 : g1,
-      score: Math.round(predictXgbSingleRow(evalRes.fullPairwiseModel, rowBuf) * 1e6) / 1e6,
+      score:
+        Math.round(predictXgbSingleRow(evalRes.fullPairwiseModel, rowBuf) * 1e6) /
+        1e6,
     };
   }
 
@@ -379,6 +410,17 @@ export function buildPredictionObject(
   const g2 = normalizeGeneSymbol(raw2, rt);
   if (g1 === g2) {
     throw new Error(`Please select two distinct target genes (resolved both to ${g1}).`);
+  }
+
+  if (!isKnownTargetSymbol(rt, raw1, g1)) {
+    throw new Error(
+      `Invalid target gene "${raw1}": not found in expression matrix or clinical dataset.`
+    );
+  }
+  if (!isKnownTargetSymbol(rt, raw2, g2)) {
+    throw new Error(
+      `Invalid target gene "${raw2}": not found in expression matrix or clinical dataset.`
+    );
   }
 
   const idx1 = rt.preprocessed.geneIndex.get(g1);

@@ -6,7 +6,31 @@ import { LeaderboardView } from './components/LeaderboardView.tsx';
 import { ModelCardView } from './components/ModelCardView.tsx';
 import { PredictView } from './components/PredictView.tsx';
 import { TopBar } from './components/TopBar.tsx';
+import {
+  UserAuthHistory,
+  type SearchHistoryEntry,
+} from './components/UserAuthHistory.tsx';
 import type { ActiveTab, GeneInfo, MetricsResponse } from './types.ts';
+
+const CURRENT_USER_KEY = 'bspai_current_user_v1';
+const HISTORY_STORAGE_KEY = 'bspai_history_v1';
+
+function loadInitialUser(): string | null {
+  try {
+    return localStorage.getItem(CURRENT_USER_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function loadInitialHistory(): Record<string, SearchHistoryEntry[]> {
+  try {
+    const raw = localStorage.getItem(HISTORY_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Record<string, SearchHistoryEntry[]>) : {};
+  } catch {
+    return {};
+  }
+}
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('home');
@@ -17,6 +41,65 @@ export default function App() {
   const [selectedGene2, setSelectedGene2] = useState<string>('CTLA4');
   const [inspectNonce, setInspectNonce] = useState<number>(0);
   const [bootError, setBootError] = useState<string | null>(null);
+
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(() =>
+    loadInitialUser()
+  );
+  const [historyByUser, setHistoryByUser] = useState<
+    Record<string, SearchHistoryEntry[]>
+  >(() => loadInitialHistory());
+
+  useEffect(() => {
+    try {
+      if (currentUserEmail) {
+        localStorage.setItem(CURRENT_USER_KEY, currentUserEmail);
+      } else {
+        localStorage.removeItem(CURRENT_USER_KEY);
+      }
+    } catch {
+      // Ignore storage quota/access issues
+    }
+  }, [currentUserEmail]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(historyByUser));
+    } catch {
+      // Ignore storage quota/access issues
+    }
+  }, [historyByUser]);
+
+  const recordSearchForUser = (g1: string, g2: string) => {
+    if (!currentUserEmail) return;
+    const clean1 = g1.trim().toUpperCase();
+    const clean2 = g2.trim().toUpperCase();
+    if (!clean1 || !clean2) return;
+
+    const entry: SearchHistoryEntry = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      gene1: clean1,
+      gene2: clean2,
+      searchedAt: new Date().toISOString(),
+    };
+
+    setHistoryByUser((prev) => {
+      const existing = prev[currentUserEmail] ?? [];
+      const deduped = existing.filter(
+        (item) => !(item.gene1 === clean1 && item.gene2 === clean2)
+      );
+      return {
+        ...prev,
+        [currentUserEmail]: [entry, ...deduped].slice(0, 30),
+      };
+    });
+  };
+
+  const handleClearHistory = (email: string) => {
+    setHistoryByUser((prev) => ({
+      ...prev,
+      [email]: [],
+    }));
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -74,6 +157,7 @@ export default function App() {
     setSelectedGene1(g1);
     setSelectedGene2(g2);
     setInspectNonce((n) => n + 1);
+    recordSearchForUser(g1, g2);
     setActiveTab('predict');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -82,9 +166,9 @@ export default function App() {
     <div className="min-h-screen flex flex-col text-[#231D18]">
       <TopBar activeTab={activeTab} onSelectTab={navigateTab} />
 
-      <main className="flex-1 max-w-[1240px] w-full mx-auto px-6 py-10">
+      <main className="flex-1 max-w-[1240px] w-full mx-auto px-6 py-10 space-y-8">
         {bootError && (
-          <div className="mb-6 bg-[#FDF4F0] border border-[#E5C1B5] rounded-xl p-4 text-sm text-[#853826]">
+          <div className="bg-[#FDF4F0] border border-[#E5C1B5] rounded-xl p-4 text-sm text-[#853826]">
             Initialization error: {bootError}
           </div>
         )}
@@ -107,6 +191,7 @@ export default function App() {
             onChangePair={(g1, g2) => {
               setSelectedGene1(g1);
               setSelectedGene2(g2);
+              recordSearchForUser(g1, g2);
             }}
           />
         )}
@@ -118,6 +203,14 @@ export default function App() {
         {activeTab === 'model-card' && <ModelCardView metrics={metrics} />}
 
         {activeTab === 'glossary' && <GlossaryView />}
+
+        <UserAuthHistory
+          currentUserEmail={currentUserEmail}
+          onUserChange={setCurrentUserEmail}
+          historyByUser={historyByUser}
+          onSelectHistoryItem={handleInspectPair}
+          onClearHistory={handleClearHistory}
+        />
       </main>
 
       <footer className="border-t border-[#E3D9CA] bg-[#FAF6F0]/80">
