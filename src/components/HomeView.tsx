@@ -102,7 +102,6 @@ export function HomeView({
       {/* 1. Editorial Research Hero */}
       <div className="bg-[#FFFEFC] border border-[#E3D9CA] rounded-2xl p-8 lg:p-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left Copy */}
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-3">
               <div className="text-xs font-medium text-[#7C5333] tracking-wide">
@@ -155,7 +154,6 @@ export function HomeView({
             </div>
           </div>
 
-          {/* Right Scientific Schematic Figure */}
           <div className="lg:col-span-6">
             <figure className="rounded-xl bg-[#FAF6F0] border border-[#E6DDD0] p-6 sm:p-8 flex flex-col justify-between min-h-[330px]">
               <div className="flex items-center justify-between text-xs text-[#7A6E61] pb-3 border-b border-[#EAE2D6]">
@@ -298,7 +296,7 @@ export function HomeView({
         </div>
         <div className="p-6">
           <div className="text-3xl font-mono font-semibold text-[#231D18] tabular-nums">
-            40+
+            63
           </div>
           <div className="mt-1.5 text-xs text-[#665B4F] leading-snug">
             biological &amp; structural features per pair
@@ -376,7 +374,7 @@ export function HomeView({
         </div>
       </div>
 
-      {/* 4. Workflow (4 Steps in a Unified Surface) */}
+      {/* 4. Workflow */}
       <div className="space-y-6">
         <div className="space-y-1.5 max-w-2xl">
           <div className="text-xs font-medium text-[#7C5333]">
@@ -407,7 +405,7 @@ export function HomeView({
         </div>
       </div>
 
-      {/* 4b. Clinical Progression Taxonomy (Understanding the 5 clinical stages) */}
+      {/* 4b. Clinical Progression Taxonomy */}
       <div className="bg-[#FFFEFC] border border-[#E3D9CA] rounded-2xl p-8 lg:p-10 space-y-6">
         <div className="space-y-2 max-w-3xl">
           <div className="text-xs font-medium text-[#7C5333]">
@@ -417,7 +415,7 @@ export function HomeView({
             Understanding the 5 clinical stages
           </h2>
           <p className="text-sm text-[#574D43] leading-relaxed">
-            Throughout the Leaderboard and Target Reports, known bispecific antibody combinations from the 791-drug clinical trial dataset are labeled across five clinical development stages — ordered from regulatory-approved therapies down to discontinued programs — which directly guide how our pairwise model learns therapeutic relevance.
+            Throughout the Leaderboard and Target Reports, known bispecific antibody combinations from the 791-drug clinical trial dataset are labeled across five clinical development stages — ordered from regulatory-approved therapies down to discontinued programs — which guide how our pairwise model learns therapeutic relevance.
           </p>
         </div>
 
@@ -445,7 +443,7 @@ export function HomeView({
           <strong className="font-semibold text-[#231D18]">
             What about Stage 0 (Novel Discovery Candidates)?
           </strong>{' '}
-          Pairs labeled <span className="font-mono text-[#231D18]">Stage 0 · Novel Candidate</span> do not yet appear in the 791-drug clinical trial dataset — these represent unbenchmarked target combinations scored through the 5-stage pairwise hierarchy to surface promising de novo bispecific candidates.
+          Pairs labeled <span className="font-mono text-[#231D18]">Stage 0 · Novel Discovery Candidate</span> do not yet appear in the 791-drug clinical trial dataset — these represent unbenchmarked target combinations scored through the 5-stage pairwise hierarchy to surface promising de novo bispecific candidates.
         </div>
       </div>
 
