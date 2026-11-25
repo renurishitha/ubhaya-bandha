@@ -545,7 +545,7 @@ export function PredictView({
       `Target Pair:                 ${reportTitlePair}`,
       ...(prediction && stageInfo
         ? [
-            `Pairwise Druggability Score: ${prediction.score.toFixed(4)}`,
+            `Pairwise Druggability Score: ${prediction.score.toFixed(4)} (0–1)`,
             `Global Candidate Rank:       #${prediction.rank.toLocaleString()} / ${(prediction.totalPairs || totalPairs).toLocaleString()}`,
             `Mechanism Class:             ${prediction.mechanismType}`,
             ...(prediction.structuralGnn
@@ -726,13 +726,13 @@ export function PredictView({
           <div className="bg-[#FFFEFC] border border-[#E3D9CA] rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#EAE2D6]">
             <div className="p-5">
               <div className="text-xs font-medium text-[#7A6E61]">
-                Pairwise Druggability Score
+                Pairwise Druggability Score <span className="font-normal text-[#8E8275]">(0–1)</span>
               </div>
               <div className="mt-2 text-3xl font-mono font-semibold text-[#7C5333] tabular-nums">
                 {prediction.score.toFixed(4)}
               </div>
               <div className="mt-1.5 text-xs text-[#6E6356] font-mono">
-                {prediction.gene1} + {prediction.gene2}
+                {prediction.gene1} + {prediction.gene2} · Range: 0–1
               </div>
             </div>
 
